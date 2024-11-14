@@ -1,0 +1,60 @@
+/* styles.css */
+
+/* Estilo para ocultar celdas que no deben mostrarse */
+.celda-dia {
+    vertical-align: middle;
+    text-align: center;
+    width: 100px;
+}
+
+.celda-materia {
+    width: 150px;
+}
+
+.celda-profesor {
+    width: 200px;
+}
+
+.celda-presente,
+.celda-ausente {
+    text-align: center;
+    width: 100px;
+}
+
+.table-planilla th, .table-planilla td {
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Resaltar filas de ausencias */
+.fila-ausente {
+    background-color: #f8d7da;
+}
+
+/* Estilos para el panel lateral */
+#form-faltas {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#resumen-faltas {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#resumen-faltas .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Ajustes para el diseño responsivo */
+@media (max-width: 768px) {
+    .w-md-25 {
+        width: 100% !important;
+    }
+}
