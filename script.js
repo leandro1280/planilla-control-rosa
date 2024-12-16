@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     "MIERCOLES": [
         { "materia": "PSI", "profesor": "Fajre M E (T)" },
-        { "materia": "LIT", "profesor": "Castro Ce (T)/Zamora Romina" },
+        { "materia": "LIT", "profesor": "BARBOSA INDIANA(S)" },
         { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
     ],
     "JUEVES": [
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
     ],
     "JUEVES": [
-        { "materia": "LIT", "profesor": "Castro Ce (T)/Zamora Romina" },
+        { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" },
         { "materia": "IAQ", "profesor": "Gimenez Juana (T)" }
     ],
     "VIERNES": [
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     "JUEVES": [
         { "materia": "GGF", "profesor": "Perez Norma (P)" },
-        { "materia": "LIT", "profesor": "Castro Ce (T)/Zamora Romina" }
+        { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" }
     ],
     "VIERNES": [
         { "materia": "PIC", "profesor": "Villar Lidia (T)" },
