@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
     ],
     "JUEVES": [
-        { "materia": "MTM", "profesor": "LOPEZ Karina (TI)" },
+        { "materia": "MTM", "profesor": "LOPEZ Karina " },
         { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" },
         { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
     ],
     "VIERNES": [
-        { "materia": "MTM", "profesor": "Torrez Janco (P)" },
+        { "materia": "MTM", "profesor": "LOPEZ karina " },
         { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" }
     ]
 },
