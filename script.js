@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "PLG", "profesor": "Barbosa (T)" }
     ],
     "VIERNES": [
-        { "materia": "AMC", "profesor": "Mascazinni (T)/Lirussi (S)" },
+        { "materia": "AMC", "profesor": "Lirussi (S)" },
         { "materia": "CSC", "profesor": "Alvarez Daniel (T)" }
     ]
 },
 "2° 1°": {
     "LUNES": [
-        { "materia": "PLG", "profesor": "Mendivil (T)/Ramirez Lurdes (S)" },
+        { "materia": "PLG", "profesor": "Ramirez Lurdes (S)" },
         { "materia": "FQA", "profesor": "Iacobucci (T)" },
         { "materia": "CCD", "profesor": "Daglio (T)" }
     ],
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     "JUEVES": [
         { "materia": "MTM", "profesor": "Motta Jorge (P)" }, 
-        { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" }
+        { "materia": "PLG", "profesor": "Cardillo (S)" }
     ],
     "VIERNES": [
         { "materia": "MTM", "profesor": "Motta Jorge (P)" },
@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "CCD", "profesor": "Capecce (P)" }
     ],
     "MARTES": [
-        { "materia": "AMC", "profesor": "Artola (T)/Pulsen Victor" },
-        { "materia": "GGF", "profesor": "Gamboa (T)/Echeverry (S)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Alvarez Fernando (S)" }
+        { "materia": "AMC", "profesor": "Pulsen Victor(S)" },
+        { "materia": "GGF", "profesor": "Echeverry (S)" },
+        { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
     ],
     "MIERCOLES": [
         { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" },
@@ -82,19 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "CCD", "profesor": "Capecce" }
     ],
     "JUEVES": [
-        { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" },
+        { "materia": "PLG", "profesor": "Cardillo (S)" },
         { "materia": "MTM", "profesor": "Coronel Emilia (P)" }
     ],
     "VIERNES": [
-        { "materia": "HTR", "profesor": "Soruco (T)/Etcheverry (S)" },
+        { "materia": "HTR", "profesor": "Etcheverry (S)" },
         { "materia": "MTM", "profesor": "Coronel Emilia (P)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Alvarez Fernando (S)" }
+        { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
     ]
 },
 "4° 1°": {
     "LUNES": [
         { "materia": "SYA", "profesor": "Miranda Ag (TI)" },
-        { "materia": "LIT", "profesor": "Mendivil (T)/Cardillo (S)" },
+        { "materia": "LIT", "profesor": "Cardillo (S)" },
         { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
     ],
     "MARTES": [
@@ -103,19 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
         { "materia": "GGF", "profesor": "Ferreyra Maria" } 
     ],
     "MIERCOLES": [
-        { "materia": "HTR", "profesor": "Soruco (T)/Esquiros (S)" },
-        { "materia": "PLG", "profesor": "Mendivil/Cardillo (S)" },
+        { "materia": "HTR", "profesor": "Esquiros (S)" },
+        { "materia": "PLG", "profesor": "Cardillo (S)" },
         { "materia": "BLG", "profesor": "Karlen Lucia (T)" }, 
         { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
     ],
     "JUEVES": [
         { "materia": "PSI", "profesor": "Cateriano Claudia (T)" },
-        { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" },
-        { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
+        { "materia": "MCS", "profesor": "Motta Jorge (S)" },
+        { "materia": "MCS", "profesor": "Motta Jorge (S)" }
     ],
     "VIERNES": [
         { "materia": "GGF", "profesor": "Ferreyra Maria (P)" },
-        { "materia": "HTR", "profesor": "Soruco (T)/Esquiroz (P)" },
+        { "materia": "HTR", "profesor": "Esquiroz (P)" },
         { "materia": "IGS", "profesor": "Soleto Daniela (P)" }
     ]
 },
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     "VIERNES": [
         { "materia": "PLG", "profesor": "Roldan Camila (TI)" },
-        { "materia": "AMC", "profesor": "Tambour Carlo (T)" },
+        { "materia": "AMC", "profesor": "Coccaro Luciano (T)" },
         { "materia": "MTM", "profesor": "Marquina Venero (P)" }
     ]
 },
