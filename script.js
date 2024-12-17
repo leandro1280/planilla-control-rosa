@@ -1225,4 +1225,5 @@ document.addEventListener('DOMContentLoaded', () => {
         selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
         selectorMateriaFalta.disabled = true;
     });
-}); // LA 
+});
+
