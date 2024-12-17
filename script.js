@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => { 
+    // --------------------- Elementos del DOM ---------------------
     const cursoContainer = document.getElementById('curso-container');
     const planillaContainer = document.getElementById('planilla-container');
     const exportarCompletaButton = document.getElementById('exportarCompleta');
@@ -13,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cantidadSeleccionada = document.getElementById('cantidadSeleccionada');
     const profesorSeleccionado = document.getElementById('profesorSeleccionado');
     const diaSeleccionado = document.getElementById('diaSeleccionado');
+    const cursoSeleccionadoModal = document.getElementById('cursoSeleccionadoModal'); // Asegúrate de tener este input hidden en tu HTML
 
-    // Definir el horario (reemplaza con tus datos reales)
+    // Definir el horario
     const horarioPorCurso = {
         "1° 1°": {
     "LUNES": [
@@ -368,7 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
     };
-
     // Suplentes por materia (opcional, si no tienes, déjalo vacío)
     const suplentesPorMateria = {
         // ... objetos suplentes si los tienes ...
@@ -379,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Seleccionar todos los cursos por defecto
     let cursosSeleccionados = [...cursosDisponibles]; 
-   
+    
     // Almacenar faltas
     let faltas = {};
     if (localStorage.getItem('faltas')) {
@@ -390,123 +391,155 @@ document.addEventListener('DOMContentLoaded', () => {
     window.horarioPorCurso = horarioPorCurso;
     window.faltas = faltas;
     window.cursosSeleccionados = cursosSeleccionados;
+
+    // --------------------- Reemplazo de Profesores ---------------------
     const selectCursoReemplazo = document.getElementById('selectCursoReemplazo');
-const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
-const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
-const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
-const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
-const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
+    const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
+    const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
+    const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
+    const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
+    const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
 
-// Poblar el selector de cursos
-function poblarSelectorCursoReemplazo() {
-    selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-    window.cursosDisponibles.forEach(curso => {
-        const option = document.createElement('option');
-        option.value = curso;
-        option.textContent = curso.toUpperCase();
-        selectCursoReemplazo.appendChild(option);
-    });
-}
-
-// Al cambiar de curso, habilitar el selector de día
-selectCursoReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    poblarSelectorDiaReemplazo(cursoSeleccionado);
-});
-
-// Poblar el selector de día en base al curso
-function poblarSelectorDiaReemplazo(curso) {
-    selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
-    selectDiaReemplazo.disabled = false;
-
-    // Días fijos
-    const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
-    const horarioCurso = window.horarioPorCurso[curso];
-
-    dias.forEach(dia => {
-        if (horarioCurso[dia]) {
+    // Poblar el selector de cursos para reemplazo
+    function poblarSelectorCursoReemplazoFunc() {
+        selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
+        cursosDisponibles.forEach(curso => {
             const option = document.createElement('option');
-            option.value = dia;
-            option.textContent = dia;
-            selectDiaReemplazo.appendChild(option);
+            option.value = curso;
+            option.textContent = curso.toUpperCase();
+            selectCursoReemplazo.appendChild(option);
+        });
+    }
+
+    // Al cambiar de curso, habilitar el selector de día
+    selectCursoReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        poblarSelectorDiaReemplazoFunc(cursoSeleccionado);
+    });
+
+    // Poblar el selector de día en base al curso
+    function poblarSelectorDiaReemplazoFunc(curso) {
+        selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
+        selectDiaReemplazo.disabled = false;
+
+        // Días fijos
+        const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
+        const horarioCurso = horarioPorCurso[curso];
+
+        dias.forEach(dia => {
+            if (horarioCurso[dia] && horarioCurso[dia].length > 0) {
+                const option = document.createElement('option');
+                option.value = dia;
+                option.textContent = dia;
+                selectDiaReemplazo.appendChild(option);
+            }
+        });
+    }
+
+    // Al cambiar de día, habilitar el selector de materia
+    selectDiaReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        const diaSeleccionado = selectDiaReemplazo.value;
+        poblarSelectorMateriaReemplazoFunc(cursoSeleccionado, diaSeleccionado);
+    });
+
+    // Poblar el selector de materia en base al curso y día
+    function poblarSelectorMateriaReemplazoFunc(curso, dia) {
+        selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
+        selectMateriaReemplazo.disabled = false;
+
+        const materias = horarioPorCurso[curso][dia] || [];
+        materias.forEach(materiaObj => {
+            const option = document.createElement('option');
+            option.value = materiaObj.materia; 
+            option.textContent = materiaObj.materia;
+            selectMateriaReemplazo.appendChild(option);
+        });
+    }
+
+    // Al cambiar de materia, mostrar el profesor actual
+    selectMateriaReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        const diaSeleccionado = selectDiaReemplazo.value;
+        const materiaSeleccionada = selectMateriaReemplazo.value;
+
+        const materias = horarioPorCurso[cursoSeleccionado][diaSeleccionado];
+        const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
+        if (materiaEncontrada) {
+            profesorActualReemplazo.value = materiaEncontrada.profesor;
         }
     });
-}
 
-// Al cambiar de día, habilitar el selector de materia
-selectDiaReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    const diaSeleccionado = selectDiaReemplazo.value;
-    poblarSelectorMateriaReemplazo(cursoSeleccionado, diaSeleccionado);
-});
+    // Función para aplicar el reemplazo
+    btnAplicarReemplazo.addEventListener('click', () => {
+        const curso = selectCursoReemplazo.value;
+        const dia = selectDiaReemplazo.value;
+        const materia = selectMateriaReemplazo.value;
+        const profesorViejo = profesorActualReemplazo.value;
+        const profesorNuevo = profesorNuevoReemplazo.value.trim();
 
-function poblarSelectorMateriaReemplazo(curso, dia) {
-    selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-    selectMateriaReemplazo.disabled = false;
+        if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
+            alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
+            return;
+        }
 
-    const materias = window.horarioPorCurso[curso][dia] || [];
-    materias.forEach(materiaObj => {
-        const option = document.createElement('option');
-        option.value = materiaObj.materia; 
-        option.textContent = materiaObj.materia;
-        selectMateriaReemplazo.appendChild(option);
+        // Llamamos a una función que reemplace el profesor en la estructura y transfiere faltas
+        reemplazarProfesor(horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
+        displayPlanilla(); // Refrescar la vista
+
+        alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
+        profesorNuevoReemplazo.value = ''; // Limpiar el campo
     });
-}
 
-// Al cambiar de materia, mostrar el profesor actual
-selectMateriaReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    const diaSeleccionado = selectDiaReemplazo.value;
-    const materiaSeleccionada = selectMateriaReemplazo.value;
+    // Función para reemplazar el profesor en una materia específica y transferir faltas
+    function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profesorNuevo) {
+        const materias = horario[curso][dia];
+        const materiaObj = materias.find(m => m.materia === materia);
+        if (materiaObj && materiaObj.profesor === profesorViejo) {
+            materiaObj.profesor = profesorNuevo;
+        } else {
+            alert('El profesor antiguo no coincide con el profesor asignado a la materia.');
+            return;
+        }
 
-    const materias = window.horarioPorCurso[cursoSeleccionado][diaSeleccionado];
-    const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
-    if (materiaEncontrada) {
-        profesorActualReemplazo.value = materiaEncontrada.profesor;
+        // Transferir faltas del profesor viejo al nuevo
+        if (faltas[profesorViejo]) {
+            if (!faltas[profesorNuevo]) {
+                faltas[profesorNuevo] = {};
+            }
+            // Transferir todas las faltas
+            for (const mes in faltas[profesorViejo]) {
+                if (!faltas[profesorNuevo][mes]) {
+                    faltas[profesorNuevo][mes] = {};
+                }
+                for (const diaFalta in faltas[profesorViejo][mes]) {
+                    if (!faltas[profesorNuevo][mes][diaFalta]) {
+                        faltas[profesorNuevo][mes][diaFalta] = {};
+                    }
+                    for (const motivo in faltas[profesorViejo][mes][diaFalta]) {
+                        if (!faltas[profesorNuevo][mes][diaFalta][motivo]) {
+                            faltas[profesorNuevo][mes][diaFalta][motivo] = {};
+                        }
+                        for (const cursoFalta in faltas[profesorViejo][mes][diaFalta][motivo]) {
+                            if (!faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta]) {
+                                faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] = 0;
+                            }
+                            faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] += faltas[profesorViejo][mes][diaFalta][motivo][cursoFalta];
+                        }
+                    }
+                }
+            }
+            // Eliminar faltas del profesor viejo
+            delete faltas[profesorViejo];
+            guardarFaltas();
+        }
     }
-});
 
-// Función para aplicar el reemplazo
-btnAplicarReemplazo.addEventListener('click', () => {
-    const curso = selectCursoReemplazo.value;
-    const dia = selectDiaReemplazo.value;
-    const materia = selectMateriaReemplazo.value;
-    const profesorViejo = profesorActualReemplazo.value;
-    const profesorNuevo = profesorNuevoReemplazo.value.trim();
-
-    if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
-        alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
-        return;
-    }
-
-    // Llamamos a una función que reemplace el profesor en la estructura
-    reemplazarProfesor(horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
-    displayPlanilla(); // refrescar la vista
-
-    alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
-    profesorNuevoReemplazo.value = ''; // limpiar el campo
-});
-
-// Función para reemplazar el profesor en una materia específica
-function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profesorNuevo) {
-    const materias = horario[curso][dia];
-    const materiaObj = materias.find(m => m.materia === materia);
-    if (materiaObj && materiaObj.profesor === profesorViejo) {
-        materiaObj.profesor = profesorNuevo;
-    }
-}
-
-
+    // --------------------- Funciones Generales ---------------------
     // Función para obtener el mes seleccionado
     function obtenerMesSeleccionado() {
-        if (typeof window.obtenerMesSeleccionado === 'function') {
-            return window.obtenerMesSeleccionado();
-        } else {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            return `${year}-${month}`;
-        }
+        const selectorMes = document.getElementById('selectorMes');
+        return selectorMes ? selectorMes.value : `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
     }
 
     // Mostrar selección de cursos
@@ -560,23 +593,23 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
     // Mostrar planilla
     function displayPlanilla() {
         planillaContainer.innerHTML = '';
-    
+
         cursosSeleccionados.forEach(curso => {
             const planilla = document.createElement('div');
             planilla.classList.add('planilla', 'curso-recuadro');
-    
+
             const titulo = document.createElement('h4');
             titulo.textContent = `Planilla de Asistencia - ${curso.toUpperCase()}`;
             titulo.classList.add('mb-3');
             planilla.appendChild(titulo);
-    
+
             const tabla = document.createElement('table');
             tabla.classList.add('table', 'table-bordered', 'table-planilla');
-    
+
             const thead = document.createElement('thead');
             thead.classList.add('table-dark');
             const encabezadoFila = document.createElement('tr');
-    
+
             const columnas = ['Día', 'Materia', 'Profesor'];
             columnas.forEach(columna => {
                 const th = document.createElement('th');
@@ -584,35 +617,35 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
                 th.classList.add('text-center');
                 encabezadoFila.appendChild(th);
             });
-    
+
             thead.appendChild(encabezadoFila);
             tabla.appendChild(thead);
-    
+
             const tbody = document.createElement('tbody');
             const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
             const mesActual = obtenerMesSeleccionado();
             
             dias.forEach(dia => {
                 const materias = horarioPorCurso[curso][dia] || [];
-    
+
                 materias.forEach((materiaObj) => {
                     const fila = document.createElement('tr');
-    
+
                     const celdaDia = document.createElement('td');
                     celdaDia.textContent = dia;
                     celdaDia.classList.add('celda-dia');
                     fila.appendChild(celdaDia);
-    
+
                     const celdaMateria = document.createElement('td');
                     celdaMateria.textContent = materiaObj.materia;
                     celdaMateria.classList.add('celda-materia');
                     fila.appendChild(celdaMateria);
-    
+
                     const celdaProfesor = document.createElement('td');
                     celdaProfesor.textContent = materiaObj.profesor;
                     celdaProfesor.classList.add('celda-profesor');
                     fila.appendChild(celdaProfesor);
-    
+
                     // Click en profesor para registrar falta
                     celdaProfesor.style.cursor = 'pointer';
                     celdaProfesor.style.color = '#0d6efd';
@@ -622,9 +655,10 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
                         diaSeleccionado.value = dia;
                         motivoSeleccionado.value = '';
                         cantidadSeleccionada.value = '1';
+                        cursoSeleccionadoModal.value = curso; // Asignar el curso al input hidden
                         motivoFaltaModal.show();
                     });
-    
+
                     // Marcar fila si hay faltas
                     if (faltas[materiaObj.profesor] && faltas[materiaObj.profesor][mesActual] && faltas[materiaObj.profesor][mesActual][dia]) {
                         for (const motivo in faltas[materiaObj.profesor][mesActual][dia]) {
@@ -632,20 +666,21 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
                                 const cantidad = faltas[materiaObj.profesor][mesActual][dia][motivo][cursoF];
                                 if (cantidad > 0 && cursoF === curso) {
                                     fila.classList.add('fila-ausente');
+                                    break; // No es necesario seguir buscando
                                 }
                             }
                         }
                     }
-    
+
                     tbody.appendChild(fila);
                 });
             });
-    
+
             tabla.appendChild(tbody);
             planilla.appendChild(tabla);
             planillaContainer.appendChild(planilla);
         });
-    
+
         mostrarResumenFaltasList();
         mostrarResumenAusenciasGeneral();
     }
@@ -710,10 +745,12 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         }
     }
 
+    // Guardar faltas en localStorage
     function guardarFaltas() {
         localStorage.setItem('faltas', JSON.stringify(faltas));
     }
 
+    // Mostrar resumen de faltas detalladas
     function mostrarResumenFaltasList() {
         const resumenFaltasContainer = document.getElementById('resumen-faltas-container');
         resumenFaltasContainer.innerHTML = '';
@@ -733,7 +770,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
                         for (const curso in faltas[docente][mes][dia][motivo]) {
                             const cantidad = faltas[docente][mes][dia][motivo][curso];
                             const item = document.createElement('li');
-                            item.classList.add('list-group-item');
+                            item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
                             item.textContent = `${docente} - Curso: ${curso} - ${mes}-${dia} - ${motivo}`;
 
                             const badge = document.createElement('span');
@@ -743,6 +780,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
                             const eliminarIcono = document.createElement('i');
                             eliminarIcono.classList.add('fas', 'fa-trash-alt', 'remove-falta');
                             eliminarIcono.title = 'Eliminar Falta';
+                            eliminarIcono.style.cursor = 'pointer';
                             eliminarIcono.style.marginLeft = '10px';
                             eliminarIcono.addEventListener('click', () => {
                                 removeAusencia(docente, mes, dia, motivo, curso);
@@ -762,6 +800,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         resumenFaltasContainer.appendChild(lista);
     }
 
+    // Mostrar resumen general de ausencias por docente
     function mostrarResumenAusenciasGeneral() {
         const resumenGeneralPrevio = document.getElementById('resumen-ausencias-general');
         if (resumenGeneralPrevio) resumenGeneralPrevio.remove();
@@ -808,7 +847,9 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         planillaContainer.appendChild(resumenGeneralContainer);
     }
 
-    function exportToPDF(tipoExportacion) {
+    // --------------------- Exportaciones ---------------------
+    // Exportar a PDF
+    function exportToPDF() {
         if (cursosSeleccionados.length === 0) {
             alert('No hay cursos seleccionados para exportar.');
             return;
@@ -851,6 +892,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
             }
         });
 
+        // Resumen General
         pdf.setFontSize(16);
         pdf.text('Resumen General de Ausencias por Docente', 10, yOffset);
         yOffset += 10;
@@ -881,6 +923,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         pdf.save(`planilla_completa_${obtenerMesSeleccionado()}.pdf`);
     }
 
+    // Exportar a Excel
     function exportarExcel() {
         if (cursosSeleccionados.length === 0) {
             alert('No hay cursos seleccionados para exportar.');
@@ -964,10 +1007,13 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         XLSX.writeFile(wb, `planilla_excel_${obtenerMesSeleccionado()}.xlsx`);
     }
 
+    // Exportar Total (igual que exportarExcel)
     function exportarTotal() {
         exportarExcel();
     }
 
+    // --------------------- Funciones Auxiliares ---------------------
+    // Obtener lista de profesores únicos
     function obtenerListaProfesores() {
         return Array.from(new Set(Object.values(horarioPorCurso).flatMap(curso => 
             Object.values(curso).flatMap(materias => 
@@ -978,36 +1024,28 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
 
     // Limpiar datos de localStorage
     limpiarLocalStorageButton.addEventListener('click', () => {
-        localStorage.removeItem('faltas');
-        faltas = {};
-        displayPlanilla();
-        mostrarResumenAusenciasGeneral();
-        mostrarResumenFaltasList();
+        if (confirm('¿Estás seguro de que deseas limpiar todos los datos de faltas?')) {
+            localStorage.removeItem('faltas');
+            faltas = {};
+            displayPlanilla();
+            mostrarResumenAusenciasGeneral();
+            mostrarResumenFaltasList();
+        }
     });
 
     // Eventos de exportación
-    exportarCompletaButton.addEventListener('click', () => {
-        exportToPDF('Completa');
-    });
+    exportarCompletaButton.addEventListener('click', exportToPDF);
     exportarExcelButton.addEventListener('click', exportarExcel);
     exportarTotalButton.addEventListener('click', exportarTotal);
 
-    // Actualizar planilla al cambiar mes
-    window.addEventListener('mesCambiado', () => {
-        displayPlanilla();
-        mostrarResumenAusenciasGeneral();
-    });
+    // --------------------- Inicialización ---------------------
+    poblarSelectorCursoReemplazoFunc();
+    displayCursoSelection();
+    displayPlanilla();
+    mostrarResumenFaltasList();
+    mostrarResumenAusenciasGeneral();
 
-    if (cursosDisponibles.length > 0) {
-        displayCursoSelection();
-        displayPlanilla();
-        mostrarResumenFaltasList();
-        mostrarResumenAusenciasGeneral();
-    } else {
-        cursoContainer.innerHTML = '<p>No hay cursos disponibles.</p>';
-    }
-
-    // Manejo del formulario para registrar faltas desde el modal de motivoFaltaModal
+    // --------------------- Manejo del Formulario de Registrar Faltas ---------------------
     formMotivoFalta.addEventListener('submit', (e) => {
         e.preventDefault();
         const docente = profesorSeleccionado.value;
@@ -1015,22 +1053,19 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         const mes = obtenerMesSeleccionado();
         const motivo = motivoSeleccionado.value.trim();
         const cantidad = parseInt(cantidadSeleccionada.value, 10);
+        const curso = cursoSeleccionadoModal.value; // Input hidden para el curso
 
-        if (!docente || !dia || !mes || !motivo || isNaN(cantidad) || cantidad <= 0) {
+        if (!docente || !dia || !mes || !motivo || isNaN(cantidad) || cantidad <= 0 || !curso) {
             alert('Completa todos los campos antes de registrar la falta.');
             return;
         }
 
-        // Registrar ausencia para todos los cursos seleccionados
-        registrarAusencia(docente, mes, dia, motivo, cantidad);
-
+        // Registrar la ausencia sólo para el curso específico
+        registrarAusencia(docente, mes, dia, motivo, cantidad, curso);
         motivoFaltaModal.hide();
     });
 
-
-    // -----------------------------------------------------------------------------------
-    // Código que antes estaba en agregarFaltas.js, ahora integrado aquí
-    // -----------------------------------------------------------------------------------
+    // --------------------- Manejo del Formulario para Agregar Faltas desde Otro Modal ---------------------
     const formAgregarFalta = document.getElementById('form-agregar-falta');
     
     // Crear selector de curso en el modal Agregar Falta
@@ -1056,11 +1091,10 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
     const selectorMesFalta = document.getElementById('selectorMesFalta');
     const selectorTipoFalta = document.getElementById('selectorTipoFalta');
 
-    function poblarSelectorCursos() {
+    // Poblar el selector de cursos para Agregar Falta
+    function poblarSelectorCursosFunc() {
         selectorCursoFalta.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-        const todosLosCursos = Object.keys(window.horarioPorCurso);
-
-        todosLosCursos.forEach(curso => {
+        cursosDisponibles.forEach(curso => {
             const option = document.createElement('option');
             option.value = curso;
             option.textContent = curso.toUpperCase();
@@ -1068,15 +1102,24 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         });
     }
 
-    function poblarCheckboxProfesores(curso) {
+    // Al cambiar de curso, habilitar el selector de día y poblar checkbox de profesores
+    selectorCursoFalta.addEventListener('change', (e) => {
+        const cursoSeleccionado = e.target.value;
+        poblarCheckboxProfesoresFunc(cursoSeleccionado);
+        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
+        selectorMateriaFalta.disabled = true;
+    });
+
+    // Poblar checkbox de profesores basado en el curso seleccionado
+    function poblarCheckboxProfesoresFunc(curso) {
         checkboxProfesorFalta.innerHTML = '';
-        if (!window.horarioPorCurso[curso]) {
+        if (!horarioPorCurso[curso]) {
             console.error(`El curso "${curso}" no existe.`);
             return;
         }
 
         const profesoresSet = new Set();
-        Object.values(window.horarioPorCurso[curso]).forEach(materiasCurso => {
+        Object.values(horarioPorCurso[curso]).forEach(materiasCurso => {
             materiasCurso.forEach(materiaObj => {
                 const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
                 profesoresSet.add(nombreProfesor);
@@ -1110,67 +1153,53 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         });
     }
 
-    function obtenerProfesoresSeleccionados() {
+    // Obtener profesores seleccionados
+    function obtenerProfesoresSeleccionadosFunc() {
         const checkboxes = checkboxProfesorFalta.querySelectorAll('input[type="checkbox"]:checked');
         return Array.from(checkboxes).map(cb => cb.value);
     }
 
-    function poblarSelectorMaterias(curso, profesoresSeleccionados) {
-        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        
-        if (!window.horarioPorCurso[curso]) {
-            console.error(`El curso "${curso}" no existe.`);
-            selectorMateriaFalta.disabled = true;
-            return;
-        }
+    // Al cambiar checkbox de profesores, poblar selector de materias
+    checkboxProfesorFalta.addEventListener('change', () => {
+        const curso = selectorCursoFalta.value;
+        const profesoresSeleccionados = obtenerProfesoresSeleccionadosFunc();
+        poblarSelectorMateriasAgregarFaltaFunc(curso, profesoresSeleccionados);
+    });
 
-        const materiasSet = new Set();
-        Object.values(window.horarioPorCurso[curso]).forEach(materiasCurso => {
-            materiasCurso.forEach(materiaObj => {
-                const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
-                if (profesoresSeleccionados.includes(nombreProfesor)) {
-                    materiasSet.add(materiaObj.materia);
-                }
-            });
+    // Poblar selector de materias basado en los profesores seleccionados
+    function poblarSelectorMateriasAgregarFaltaFunc(curso, profesoresSeleccionados) {
+        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
+        selectorMateriaFalta.disabled = false;
+
+        const materias = horarioPorCurso[curso][dia] || [];
+        const dia = selectorDiaFalta.value;
+
+        const materiasFiltradas = horarioPorCurso[curso][dia].filter(materiaObj => {
+            const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
+            return profesoresSeleccionados.includes(nombreProfesor);
         });
 
-        const materias = Array.from(materiasSet).sort();
-        if (materias.length === 0) {
+        materiasFiltradas.forEach(materiaObj => {
+            const option = document.createElement('option');
+            option.value = materiaObj.materia; 
+            option.textContent = materiaObj.materia;
+            selectorMateriaFalta.appendChild(option);
+        });
+
+        if (materiasFiltradas.length === 0) {
             const option = document.createElement('option');
             option.value = "";
             option.textContent = "No hay materias para los profesores seleccionados";
             selectorMateriaFalta.appendChild(option);
             selectorMateriaFalta.disabled = true;
-        } else {
-            materias.forEach(materia => {
-                const option = document.createElement('option');
-                option.value = materia;
-                option.textContent = materia;
-                selectorMateriaFalta.appendChild(option);
-            });
-            selectorMateriaFalta.disabled = false;
         }
     }
 
-    selectorCursoFalta.addEventListener('change', (e) => {
-        const cursoSeleccionado = e.target.value;
-        poblarCheckboxProfesores(cursoSeleccionado);
-        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectorMateriaFalta.disabled = true;
-    });
-
-    checkboxProfesorFalta.addEventListener('change', () => {
-        const curso = selectorCursoFalta.value;
-        const profesoresSeleccionados = obtenerProfesoresSeleccionados();
-        poblarSelectorMaterias(curso, profesoresSeleccionados);
-    });
-
-    poblarSelectorCursos();
-
+    // Manejo del formulario para Agregar Falta desde otro modal
     formAgregarFalta.addEventListener('submit', (e) => {
         e.preventDefault();
         const curso = selectorCursoFalta.value;
-        const profesoresSeleccionados = obtenerProfesoresSeleccionados();
+        const profesoresSeleccionados = obtenerProfesoresSeleccionadosFunc();
         const materia = selectorMateriaFalta.value;
         const dia = selectorDiaFalta.value;
         const mes = selectorMesFalta.value;
@@ -1183,7 +1212,7 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
 
         // Registrar la falta en el curso seleccionado
         profesoresSeleccionados.forEach(profesor => {
-            window.registrarAusencia(profesor, mes, dia, tipo, 1, curso);
+            registrarAusencia(profesor, mes, dia, tipo, 1, curso);
         });
 
         const agregarFaltaModal = bootstrap.Modal.getInstance(document.getElementById('agregarFaltaModal'));
@@ -1196,246 +1225,4 @@ function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profeso
         selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
         selectorMateriaFalta.disabled = true;
     });
-});
-
-celdaProfesor.addEventListener('click', () => {
-    const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
-    profesorSeleccionado.value = nombreProfesor;
-    diaSeleccionado.value = dia;
-    motivoSeleccionado.value = '';
-    cantidadSeleccionada.value = '1';
-    
-    // Aquí asignamos el curso actual al input hidden
-    document.getElementById('cursoSeleccionadoModal').value = curso;
-    
-    motivoFaltaModal.show();
-});
-
-formMotivoFalta.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const docente = profesorSeleccionado.value;
-    const dia = diaSeleccionado.value;
-    const mes = obtenerMesSeleccionado();
-    const motivo = motivoSeleccionado.value.trim();
-    const cantidad = parseInt(cantidadSeleccionada.value, 10);
-    const curso = document.getElementById('cursoSeleccionadoModal').value;
-
-    if (!docente || !dia || !mes || !motivo || isNaN(cantidad) || cantidad <= 0) {
-        alert('Completa todos los campos antes de registrar la falta.');
-        return;
-    }
-
-    // Ahora registramos la ausencia sólo para el curso específico
-    registrarAusencia(docente, mes, dia, motivo, cantidad, curso);
-    motivoFaltaModal.hide();
-});
-
-
-const selectCursoReemplazo = document.getElementById('selectCursoReemplazo');
-const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
-const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
-const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
-const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
-const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
-
-// Poblar el selector de cursos
-function poblarSelectorCursoReemplazo() {
-    selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-    window.cursosDisponibles.forEach(curso => {
-        const option = document.createElement('option');
-        option.value = curso;
-        option.textContent = curso.toUpperCase();
-        selectCursoReemplazo.appendChild(option);
-    });
-}
-
-// Al cambiar de curso, habilitar el selector de día
-selectCursoReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    poblarSelectorDiaReemplazo(cursoSeleccionado);
-});
-
-// Poblar el selector de día en base al curso
-function poblarSelectorDiaReemplazo(curso) {
-    selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
-    selectDiaReemplazo.disabled = false;
-
-    // Días fijos
-    const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
-    const horarioCurso = window.horarioPorCurso[curso];
-
-    dias.forEach(dia => {
-        if (horarioCurso[dia]) {
-            const option = document.createElement('option');
-            option.value = dia;
-            option.textContent = dia;
-            selectDiaReemplazo.appendChild(option);
-        }
-    });
-}
-
-// Al cambiar de día, habilitar el selector de materia
-selectDiaReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    const diaSeleccionado = selectDiaReemplazo.value;
-    poblarSelectorMateriaReemplazo(cursoSeleccionado, diaSeleccionado);
-});
-
-function poblarSelectorMateriaReemplazo(curso, dia) {
-    selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-    selectMateriaReemplazo.disabled = false;
-
-    const materias = window.horarioPorCurso[curso][dia] || [];
-    materias.forEach(materiaObj => {
-        const option = document.createElement('option');
-        option.value = materiaObj.materia; 
-        option.textContent = materiaObj.materia;
-        selectMateriaReemplazo.appendChild(option);
-    });
-}
-
-// Al cambiar de materia, mostrar el profesor actual
-selectMateriaReemplazo.addEventListener('change', () => {
-    const cursoSeleccionado = selectCursoReemplazo.value;
-    const diaSeleccionado = selectDiaReemplazo.value;
-    const materiaSeleccionada = selectMateriaReemplazo.value;
-
-    const materias = window.horarioPorCurso[cursoSeleccionado][diaSeleccionado];
-    const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
-    if (materiaEncontrada) {
-        profesorActualReemplazo.value = materiaEncontrada.profesor;
-    }
-});
-
-// Función para aplicar el reemplazo
-btnAplicarReemplazo.addEventListener('click', () => {
-    const curso = selectCursoReemplazo.value;
-    const dia = selectDiaReemplazo.value;
-    const materia = selectMateriaReemplazo.value;
-    const profesorViejo = profesorActualReemplazo.value;
-    const profesorNuevo = profesorNuevoReemplazo.value.trim();
-
-    if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
-        alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
-        return;
-    }
-
-    // Llamamos a una función que reemplace el profesor en la estructura
-    reemplazarProfesor(horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
-    displayPlanilla(); // refrescar la vista
-
-    alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
-    profesorNuevoReemplazo.value = ''; // limpiar el campo
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    // ... Aquí va tu código existente previo ...
-
-    const selectCursoReemplazo = document.getElementById('selectCursoReemplazo');
-    const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
-    const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
-    const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
-    const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
-    const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
-
-    // Poblar el selector de cursos para el reemplazo
-    function poblarSelectorCursoReemplazo() {
-        selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-        window.cursosDisponibles.forEach(curso => {
-            const option = document.createElement('option');
-            option.value = curso;
-            option.textContent = curso.toUpperCase();
-            selectCursoReemplazo.appendChild(option);
-        });
-    }
-
-    // Llamar a la función para poblar el selector de cursos
-    poblarSelectorCursoReemplazo();
-
-    // Al cambiar de curso, habilitar el selector de día
-    selectCursoReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        poblarSelectorDiaReemplazo(cursoSeleccionado);
-    });
-
-    function poblarSelectorDiaReemplazo(curso) {
-        selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
-        selectDiaReemplazo.disabled = false;
-
-        const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
-        const horarioCurso = window.horarioPorCurso[curso];
-
-        dias.forEach(dia => {
-            if (horarioCurso[dia]) {
-                const option = document.createElement('option');
-                option.value = dia;
-                option.textContent = dia;
-                selectDiaReemplazo.appendChild(option);
-            }
-        });
-    }
-
-    // Al cambiar de día, habilitar el selector de materia
-    selectDiaReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        const diaSeleccionado = selectDiaReemplazo.value;
-        poblarSelectorMateriaReemplazo(cursoSeleccionado, diaSeleccionado);
-    });
-
-    function poblarSelectorMateriaReemplazo(curso, dia) {
-        selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectMateriaReemplazo.disabled = false;
-
-        const materias = window.horarioPorCurso[curso][dia] || [];
-        materias.forEach(materiaObj => {
-            const option = document.createElement('option');
-            option.value = materiaObj.materia; 
-            option.textContent = materiaObj.materia;
-            selectMateriaReemplazo.appendChild(option);
-        });
-    }
-
-    // Al cambiar de materia, mostrar el profesor actual
-    selectMateriaReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        const diaSeleccionado = selectDiaReemplazo.value;
-        const materiaSeleccionada = selectMateriaReemplazo.value;
-
-        const materias = window.horarioPorCurso[cursoSeleccionado][diaSeleccionado];
-        const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
-        if (materiaEncontrada) {
-            profesorActualReemplazo.value = materiaEncontrada.profesor;
-        }
-    });
-
-    // Función para aplicar el reemplazo
-    btnAplicarReemplazo.addEventListener('click', () => {
-        const curso = selectCursoReemplazo.value;
-        const dia = selectDiaReemplazo.value;
-        const materia = selectMateriaReemplazo.value;
-        const profesorViejo = profesorActualReemplazo.value;
-        const profesorNuevo = profesorNuevoReemplazo.value.trim();
-
-        if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
-            alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
-            return;
-        }
-
-        reemplazarProfesor(window.horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
-        displayPlanilla(); // Refrescar la vista
-
-        alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
-        profesorNuevoReemplazo.value = '';
-    });
-
-    function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profesorNuevo) {
-        const materias = horario[curso][dia];
-        const materiaObj = materias.find(m => m.materia === materia);
-        // Verificación exacta: el profesor en materiaObj.profesor debe coincidir con profesorViejo
-        if (materiaObj && materiaObj.profesor === profesorViejo) {
-            materiaObj.profesor = profesorNuevo;
-        }
-    }
-
-    // ... Resto de tu código existente ...
 });
