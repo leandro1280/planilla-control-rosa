@@ -58,46 +58,19 @@
             background-color: #138496;
             border-color: #117a8b;
         }
+
+        /* Estilos opcionales para suplentes */
+        .fila-suplente {
+            background-color: #fff3cd; /* Amarillo claro */
+        }
+
+        .fila-ausente {
+            background-color: #f8d7da; /* Rojo claro */
+        }
     </style>
 </head>
 
-    <header>
-        <h5>Reemplazar Profesor</h5>
-        <div class="row mb-3">
-            <div class="col">
-                <label for="selectCursoReemplazo" class="form-label">Curso</label>
-                <select id="selectCursoReemplazo" class="form-select">
-                    <option value="" disabled selected>Selecciona un curso</option>
-                </select>
-            </div>
-            <div class="col">
-                <label for="selectDiaReemplazo" class="form-label">Día</label>
-                <select id="selectDiaReemplazo" class="form-select" disabled>
-                    <option value="" disabled selected>Selecciona un día</option>
-                </select>
-            </div>
-            <div class="col">
-                <label for="selectMateriaReemplazo" class="form-label">Materia</label>
-                <select id="selectMateriaReemplazo" class="form-select" disabled>
-                    <option value="" disabled selected>Selecciona una materia</option>
-                </select>
-            </div>
-        </div>
-    
-        <div class="row mb-3">
-            <div class="col">
-                <label class="form-label">Profesor Actual</label>
-                <input type="text" id="profesorActualReemplazo" class="form-control" readonly>
-            </div>
-            <div class="col">
-                <label for="profesorNuevoReemplazo" class="form-label">Nuevo Profesor</label>
-                <input type="text" id="profesorNuevoReemplazo" class="form-control" placeholder="Ej: Juarez (P)">
-            </div>
-        </div>
-    
-        <button id="btnAplicarReemplazo" class="btn btn-primary">Aplicar Reemplazo</button>
-    </header>
-    <body>
+<body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Planilla de Asistencia</h1>
         
@@ -135,10 +108,14 @@
                             <input type="text" class="form-control" id="profesorSeleccionado" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="diaSeleccionado" class="form-label">Día</label>
+                            <label for="diaSeleccionado" class="form-label">Día de la Semana</label>
                             <input type="text" class="form-control" id="diaSeleccionado" readonly>
-                            <input type="hidden" id="cursoSeleccionadoModal">
                         </div>
+                        <div class="mb-3">
+                            <label for="numeroDiaSeleccionado" class="form-label">Número del Día</label>
+                            <input type="number" class="form-control" id="numeroDiaSeleccionado" min="1" max="31" required>
+                        </div>
+                        <input type="hidden" id="cursoSeleccionadoModal">
                         <div class="mb-3">
                             <label for="motivoSeleccionado" class="form-label">Motivo de Falta</label>
                             <input type="text" class="form-control" id="motivoSeleccionado" required>
@@ -155,66 +132,15 @@
                 </form>
             </div>
         </div>
-    
-        <!-- Modal para Agregar Falta -->
-        <div class="modal fade" id="agregarFaltaModal" tabindex="-1" aria-labelledby="agregarFaltaModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <form id="form-agregar-falta" class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="agregarFaltaModalLabel">Agregar Falta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="selectorCursoFalta" class="form-label">Curso</label>
-                        <!-- Este select se crea dinámicamente en el JS -->
-                        <!-- Checkboxes de Profesores creados dinámicamente -->
-                        
-                        <div class="mb-3">
-                            <label for="selectorMateriaFalta" class="form-label">Materia</label>
-                            <select id="selectorMateriaFalta" class="form-select" disabled required>
-                                <option value="" disabled selected>Selecciona una materia</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="selectorDiaFalta" class="form-label">Día</label>
-                            <select id="selectorDiaFalta" class="form-select" required>
-                                <option value="" disabled selected>Selecciona un día</option>
-                                <option value="LUNES">Lunes</option>
-                                <option value="MARTES">Martes</option>
-                                <option value="MIERCOLES">Miércoles</option>
-                                <option value="JUEVES">Jueves</option>
-                                <option value="VIERNES">Viernes</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="selectorMesFalta" class="form-label">Mes</label>
-                            <input type="month" id="selectorMesFalta" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="selectorTipoFalta" class="form-label">Tipo de Falta</label>
-                            <select id="selectorTipoFalta" class="form-select" required>
-                                <option value="" disabled selected>Selecciona un tipo de falta</option>
-                                <option value="paro">Paro</option>
-                                <option value="lic_medica">Licencia Médica</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Agregar Falta</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
-    <!-- Botón para Abrir el Modal de Agregar Falta -->
-    <div class="d-flex justify-content-end mt-4">
-        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#agregarFaltaModal">
-            <i class="fas fa-plus-circle"></i> Agregar Falta
+    <!-- Botón para Abrir el Modal de Registrar Falta (Opcional) -->
+    <!-- Puedes eliminar este botón si solo utilizas el clic en la tabla para abrir el modal -->
+    <!-- <div class="d-flex justify-content-end mt-4">
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#motivoFaltaModal">
+            <i class="fas fa-plus-circle"></i> Registrar Falta
         </button>
-    </div>
+    </div> -->
 
     <!-- Librerías JavaScript necesarias -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -226,7 +152,5 @@
     <script src="selectorMes.js"></script>
     <!-- Script Principal -->
     <script src="script.js"></script>
-    <!-- Script para agregar faltas -->
-    <script src="agregarFaltas.js"></script>
 </body>
 </html>
