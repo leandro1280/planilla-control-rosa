@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const numeroDiaSeleccionado = document.getElementById('numeroDiaSeleccionado'); // Nuevo campo
     const cursoSeleccionadoModal = document.getElementById('cursoSeleccionadoModal'); // Input hidden para el curso
 
-    // Definir el horario (debes completar este objeto según tu estructura)
+    // Definir el horario
     const horarioPorCurso = {
         "1° 1°": {
             "LUNES": [
@@ -371,11 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Suplentes por materia (si tienes suplentes predefinidos por materia)
+    // Suplentes por materia (opcional, si no tienes, déjalo vacío)
     const suplentesPorMateria = {
-        // Ejemplo:
-        // "Matemáticas": ["Carlos", "Luisa"],
-        // "Historia": ["Pedro", "Marta"],
+        // ... objetos suplentes si los tienes ...
     };
     
     // Lista de cursos disponibles
@@ -395,9 +393,148 @@ document.addEventListener('DOMContentLoaded', () => {
     window.faltas = faltas;
     window.cursosSeleccionados = cursosSeleccionados;
 
-    // --------------------- Registrar Falta al Hacer Clic en el Profesor ---------------------
-    // No se necesita un modal adicional, ya que se usará el modal principal
-    // Asumimos que las filas de profesores ya están creadas en la planilla
+    // --------------------- Reemplazo de Profesores ---------------------
+    const selectCursoReemplazo = document.getElementById('selectCursoReemplazo');
+    const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
+    const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
+    const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
+    const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
+    const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
+
+    // Poblar el selector de cursos para reemplazo
+    function poblarSelectorCursoReemplazoFunc() {
+        selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
+        cursosDisponibles.forEach(curso => {
+            const option = document.createElement('option');
+            option.value = curso;
+            option.textContent = curso.toUpperCase();
+            selectCursoReemplazo.appendChild(option);
+        });
+    }
+
+    // Al cambiar de curso, habilitar el selector de día
+    selectCursoReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        poblarSelectorDiaReemplazoFunc(cursoSeleccionado);
+    });
+
+    // Poblar el selector de día en base al curso
+    function poblarSelectorDiaReemplazoFunc(curso) {
+        selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
+        selectDiaReemplazo.disabled = false;
+
+        // Días fijos
+        const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
+        const horarioCurso = horarioPorCurso[curso];
+
+        dias.forEach(dia => {
+            if (horarioCurso[dia] && horarioCurso[dia].length > 0) {
+                const option = document.createElement('option');
+                option.value = dia;
+                option.textContent = dia;
+                selectDiaReemplazo.appendChild(option);
+            }
+        });
+    }
+
+    // Al cambiar de día, habilitar el selector de materia
+    selectDiaReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        const diaSeleccionado = selectDiaReemplazo.value;
+        poblarSelectorMateriaReemplazoFunc(cursoSeleccionado, diaSeleccionado);
+    });
+
+    // Poblar el selector de materia en base al curso y día
+    function poblarSelectorMateriaReemplazoFunc(curso, dia) {
+        selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
+        selectMateriaReemplazo.disabled = false;
+
+        const materias = horarioPorCurso[curso][dia] || [];
+        materias.forEach(materiaObj => {
+            const option = document.createElement('option');
+            option.value = materiaObj.materia; 
+            option.textContent = materiaObj.materia;
+            selectMateriaReemplazo.appendChild(option);
+        });
+    }
+
+    // Al cambiar de materia, mostrar el profesor actual
+    selectMateriaReemplazo.addEventListener('change', () => {
+        const cursoSeleccionado = selectCursoReemplazo.value;
+        const diaSeleccionado = selectDiaReemplazo.value;
+        const materiaSeleccionada = selectMateriaReemplazo.value;
+
+        const materias = horarioPorCurso[cursoSeleccionado][diaSeleccionado];
+        const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
+        if (materiaEncontrada) {
+            profesorActualReemplazo.value = materiaEncontrada.profesor;
+        }
+    });
+
+    // Función para aplicar el reemplazo
+    btnAplicarReemplazo.addEventListener('click', () => {
+        const curso = selectCursoReemplazo.value;
+        const dia = selectDiaReemplazo.value;
+        const materia = selectMateriaReemplazo.value;
+        const profesorViejo = profesorActualReemplazo.value;
+        const profesorNuevo = profesorNuevoReemplazo.value.trim();
+
+        if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
+            alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
+            return;
+        }
+
+        // Llamamos a una función que reemplace el profesor en la estructura y transfiere faltas
+        reemplazarProfesor(horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
+        displayPlanilla(); // Refrescar la vista
+
+        alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
+        profesorNuevoReemplazo.value = ''; // Limpiar el campo
+    });
+
+    // Función para reemplazar el profesor en una materia específica y transferir faltas
+    function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profesorNuevo) {
+        const materias = horario[curso][dia];
+        const materiaObj = materias.find(m => m.materia === materia);
+        if (materiaObj && materiaObj.profesor === profesorViejo) {
+            materiaObj.profesor = profesorNuevo;
+        } else {
+            alert('El profesor antiguo no coincide con el profesor asignado a la materia.');
+            return;
+        }
+
+        // Transferir faltas del profesor viejo al nuevo
+        if (faltas[profesorViejo]) {
+            if (!faltas[profesorNuevo]) {
+                faltas[profesorNuevo] = {};
+            }
+            // Transferir todas las faltas
+            for (const mes in faltas[profesorViejo]) {
+                if (!faltas[profesorNuevo][mes]) {
+                    faltas[profesorNuevo][mes] = {};
+                }
+                for (const diaFalta in faltas[profesorViejo][mes]) {
+                    if (!faltas[profesorNuevo][mes][diaFalta]) {
+                        faltas[profesorNuevo][mes][diaFalta] = {};
+                    }
+                    for (const motivo in faltas[profesorViejo][mes][diaFalta]) {
+                        if (!faltas[profesorNuevo][mes][diaFalta][motivo]) {
+                            faltas[profesorNuevo][mes][diaFalta][motivo] = {};
+                        }
+                        for (const cursoFalta in faltas[profesorViejo][mes][diaFalta][motivo]) {
+                            if (!faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta]) {
+                                faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] = 0;
+                            }
+                            faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] += faltas[profesorViejo][mes][diaFalta][motivo][cursoFalta];
+                        }
+                    }
+                }
+            }
+            // Eliminar faltas del profesor viejo
+            delete faltas[profesorViejo];
+            guardarFaltas();
+        }
+    }
 
     // --------------------- Funciones Generales ---------------------
     // Función para obtener el mes seleccionado
@@ -541,15 +678,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Marcar fila si hay faltas
                     if (faltas[materiaObj.profesor] && faltas[materiaObj.profesor][mesActual] && faltas[materiaObj.profesor][mesActual][dia]) {
-                        for (const numeroDia in faltas[materiaObj.profesor][mesActual][dia]) {
-                            for (const motivo in faltas[materiaObj.profesor][mesActual][dia][numeroDia]) {
-                                for (const cursoF in faltas[materiaObj.profesor][mesActual][dia][numeroDia][motivo]) {
-                                    const cantidad = faltas[materiaObj.profesor][mesActual][dia][numeroDia][motivo][cursoF];
-                                    if (cantidad > 0 && cursoF === curso) {
-                                        fila.classList.add('fila-ausente');
-                                        celdaNumeroDia.textContent = numeroDia; // Mostrar el número del día
-                                        break; // No es necesario seguir buscando
-                                    }
+                        for (const motivo in faltas[materiaObj.profesor][mesActual][dia]) {
+                            for (const cursoFalta in faltas[materiaObj.profesor][mesActual][dia][motivo]) {
+                                const cantidad = faltas[materiaObj.profesor][mesActual][dia][motivo][cursoFalta];
+                                if (cantidad > 0 && cursoFalta === curso) {
+                                    fila.classList.add('fila-ausente');
+                                    celdaNumeroDia.textContent = numeroDiaSeleccionado.value || '—'; // Mostrar el número del día si está registrado
+                                    break; // No es necesario seguir buscando
                                 }
                             }
                         }
@@ -608,18 +743,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Eliminar ausencia
-    function removeAusencia(docente, mes, dia, numeroDia, motivo, curso) {
-        if (motivo && curso && numeroDia) {
-            if (faltas[docente] && faltas[docente][mes] && faltas[docente][mes][dia] && faltas[docente][mes][dia][numeroDia] && faltas[docente][mes][dia][numeroDia][motivo] && faltas[docente][mes][dia][numeroDia][motivo][curso]) {
-                faltas[docente][mes][dia][numeroDia][motivo][curso] -= 1;
-                if (faltas[docente][mes][dia][numeroDia][motivo][curso] <= 0) {
-                    delete faltas[docente][mes][dia][numeroDia][motivo][curso];
+    function removeAusencia(docente, mes, dia, motivo, curso) {
+        if (motivo && curso && dia) {
+            if (faltas[docente] && faltas[docente][mes] && faltas[docente][mes][dia] && faltas[docente][mes][dia][motivo] && faltas[docente][mes][dia][motivo][curso]) {
+                faltas[docente][mes][dia][motivo][curso] -= 1;
+                if (faltas[docente][mes][dia][motivo][curso] <= 0) {
+                    delete faltas[docente][mes][dia][motivo][curso];
                 }
-                if (Object.keys(faltas[docente][mes][dia][numeroDia][motivo]).length === 0) {
-                    delete faltas[docente][mes][dia][numeroDia][motivo];
-                }
-                if (Object.keys(faltas[docente][mes][dia][numeroDia]).length === 0) {
-                    delete faltas[docente][mes][dia][numeroDia];
+                if (Object.keys(faltas[docente][mes][dia][motivo]).length === 0) {
+                    delete faltas[docente][mes][dia][motivo];
                 }
                 if (Object.keys(faltas[docente][mes][dia]).length === 0) {
                     delete faltas[docente][mes][dia];
@@ -677,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 eliminarIcono.style.cursor = 'pointer';
                                 eliminarIcono.style.marginLeft = '10px';
                                 eliminarIcono.addEventListener('click', () => {
-                                    removeAusencia(docente, mes, dia, numeroDia, motivo, curso);
+                                    removeAusencia(docente, mes, dia, motivo, curso);
                                 });
 
                                 const container = document.createElement('div');
@@ -803,8 +935,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     for (const dia in faltas[profesor][mes]) {
                         for (const numeroDia in faltas[profesor][mes][dia]) {
                             for (const motivo in faltas[profesor][mes][dia][numeroDia]) {
-                                for (const cursoFalta in faltas[profesor][mes][dia][numeroDia][motivo]) {
-                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFalta];
+                                for (const cursoFaltas in faltas[profesor][mes][dia][numeroDia][motivo]) {
+                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFaltas];
                                 }
                             }
                         }
@@ -889,8 +1021,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     for (const dia in faltas[profesor][mes]) {
                         for (const numeroDia in faltas[profesor][mes][dia]) {
                             for (const motivo in faltas[profesor][mes][dia][numeroDia]) {
-                                for (const cursoFalta in faltas[profesor][mes][dia][numeroDia][motivo]) {
-                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFalta];
+                                for (const cursoFaltas in faltas[profesor][mes][dia][numeroDia][motivo]) {
+                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFaltas];
                                 }
                             }
                         }
@@ -946,6 +1078,7 @@ document.addEventListener('DOMContentLoaded', () => {
     exportarTotalButton.addEventListener('click', exportarTotal);
 
     // --------------------- Inicialización ---------------------
+    poblarSelectorCursoReemplazoFunc();
     displayCursoSelection();
     displayPlanilla();
     mostrarResumenFaltasList();
