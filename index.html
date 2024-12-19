@@ -59,7 +59,7 @@
             border-color: #117a8b;
         }
 
-        /* Estilos opcionales para suplentes */
+        /* Estilos opcionales para suplentes y ausentes */
         .fila-suplente {
             background-color: #fff3cd; /* Amarillo claro */
         }
@@ -69,6 +69,43 @@
         }
     </style>
 </head>
+
+<header>
+    <h5>Reemplazar Profesor</h5>
+    <div class="row mb-3">
+        <div class="col">
+            <label for="selectCursoReemplazo" class="form-label">Curso</label>
+            <select id="selectCursoReemplazo" class="form-select">
+                <option value="" disabled selected>Selecciona un curso</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectDiaReemplazo" class="form-label">Día</label>
+            <select id="selectDiaReemplazo" class="form-select" disabled>
+                <option value="" disabled selected>Selecciona un día</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="selectMateriaReemplazo" class="form-label">Materia</label>
+            <select id="selectMateriaReemplazo" class="form-select" disabled>
+                <option value="" disabled selected>Selecciona una materia</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label class="form-label">Profesor Actual</label>
+            <input type="text" id="profesorActualReemplazo" class="form-control" readonly>
+        </div>
+        <div class="col">
+            <label for="profesorNuevoReemplazo" class="form-label">Nuevo Profesor</label>
+            <input type="text" id="profesorNuevoReemplazo" class="form-control" placeholder="Ej: Juarez (P)">
+        </div>
+    </div>
+
+    <button id="btnAplicarReemplazo" class="btn btn-primary">Aplicar Reemplazo</button>
+</header>
 
 <body>
     <div class="container my-5">
@@ -134,14 +171,6 @@
         </div>
     </div>
 
-    <!-- Botón para Abrir el Modal de Registrar Falta (Opcional) -->
-    <!-- Puedes eliminar este botón si solo utilizas el clic en la tabla para abrir el modal -->
-    <!-- <div class="d-flex justify-content-end mt-4">
-        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#motivoFaltaModal">
-            <i class="fas fa-plus-circle"></i> Registrar Falta
-        </button>
-    </div> -->
-
     <!-- Librerías JavaScript necesarias -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -151,8 +180,10 @@
     <!-- Script del selector de Mes -->
     <script src="selectorMes.js"></script>
     <!-- Script Principal -->
-    <script src="prueba.js"></script>
+    <script src="script.js"></script>
 </body>
+</html>
+
 </html>
 
 </body>
