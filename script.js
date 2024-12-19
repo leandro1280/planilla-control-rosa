@@ -14,365 +14,368 @@ document.addEventListener('DOMContentLoaded', () => {
     const cantidadSeleccionada = document.getElementById('cantidadSeleccionada');
     const profesorSeleccionado = document.getElementById('profesorSeleccionado');
     const diaSeleccionado = document.getElementById('diaSeleccionado');
-    const cursoSeleccionadoModal = document.getElementById('cursoSeleccionadoModal'); // Asegúrate de tener este input hidden en tu HTML
+    const numeroDiaSeleccionado = document.getElementById('numeroDiaSeleccionado'); // Nuevo campo
+    const cursoSeleccionadoModal = document.getElementById('cursoSeleccionadoModal'); // Input hidden para el curso
 
-    // Definir el horario
+    // Definir el horario (debes completar este objeto según tu estructura)
     const horarioPorCurso = {
         "1° 1°": {
-    "LUNES": [
-        { "materia": "CNT", "profesor": "Pasalacua (T)" },
-        { "materia": "PLG", "profesor": "Barbosa (T)" },
-        { "materia": "EF", "profesor": "Miguel Pablo (S)" }, 
-        { "materia": "CCD", "profesor": "Daglio (T)" }
-    ],
-    "MARTES": [
-        { "materia": "CSC", "profesor": "Alvarez Daniel (T)" },
-        { "materia": "MTM", "profesor": "Crivaro (T)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "CNT", "profesor": "Pasalacua (T)" },
-        { "materia": "MTM", "profesor": "Crivaro (T)" },
-        { "materia": "EFC", "profesor": "Miguel Pablo (S)" }
-    ],
-    "JUEVES": [
-        { "materia": "IGS", "profesor": "Cernada (P)" },
-        { "materia": "PLG", "profesor": "Barbosa (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "AMC", "profesor": "Lirussi (S)" },
-        { "materia": "CSC", "profesor": "Alvarez Daniel (T)" }
-    ]
-},
-"2° 1°": {
-    "LUNES": [
-        { "materia": "PLG", "profesor": "Ramirez Lurdes (S)" },
-        { "materia": "FQA", "profesor": "Iacobucci (T)" },
-        { "materia": "CCD", "profesor": "Daglio (T)" }
-    ],
-    "MARTES": [
-        { "materia": "HTR", "profesor": "Lucero Gianetti (T)" }, 
-        { "materia": "AMC", "profesor": "Artola (T)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "BLG", "profesor": "Gerhardt (T)" },
-        { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "MTM", "profesor": "Motta Jorge (P)" }, 
-        { "materia": "PLG", "profesor": "Cardillo (S)" }
-    ],
-    "VIERNES": [
-        { "materia": "MTM", "profesor": "Motta Jorge (P)" },
-        { "materia": "GGF", "profesor": "Almada Catalina (TI)" } 
-    ]
-},
-"3° 1°": {
-    "LUNES": [
-        { "materia": "FQA", "profesor": "Iacobucci (T)" },
-        { "materia": "BLG", "profesor": "Gerhardt (T)" },
-        { "materia": "CCD", "profesor": "Capecce (P)" }
-    ],
-    "MARTES": [
-        { "materia": "AMC", "profesor": "Pulsen Victor(S)" },
-        { "materia": "GGF", "profesor": "Echeverry (S)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" },
-        { "materia": "IGS", "profesor": "Sanchez Carolina (P)" },
-        { "materia": "CCD", "profesor": "Capecce" }
-    ],
-    "JUEVES": [
-        { "materia": "PLG", "profesor": "Cardillo (S)" },
-        { "materia": "MTM", "profesor": "Coronel Emilia (P)" }
-    ],
-    "VIERNES": [
-        { "materia": "HTR", "profesor": "Etcheverry (S)" },
-        { "materia": "MTM", "profesor": "Coronel Emilia (P)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
-    ]
-},
-"4° 1°": {
-    "LUNES": [
-        { "materia": "SYA", "profesor": "Miranda Ag (TI)" },
-        { "materia": "LIT", "profesor": "Cardillo (S)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "MARTES": [
-        { "materia": "NTI", "profesor": "Crivaro (T)" },
-        { "materia": "IAF", "profesor": "Torrez Janco (P)" },
-        { "materia": "GGF", "profesor": "Ferreyra Maria" } 
-    ],
-    "MIERCOLES": [
-        { "materia": "HTR", "profesor": "Esquiros (S)" },
-        { "materia": "PLG", "profesor": "Cardillo (S)" },
-        { "materia": "BLG", "profesor": "Karlen Lucia (T)" }, 
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "PSI", "profesor": "Cateriano Claudia (T)" },
-        { "materia": "MCS", "profesor": "Motta Jorge (S)" },
-        { "materia": "MCS", "profesor": "Motta Jorge (S)" }
-    ],
-    "VIERNES": [
-        { "materia": "GGF", "profesor": "Ferreyra Maria (P)" },
-        { "materia": "HTR", "profesor": "Esquiroz (P)" },
-        { "materia": "IGS", "profesor": "Soleto Daniela (P)" }
-    ]
-},
-"5° 2°": {
-    "LUNES": [
-        { "materia": "CCD", "profesor": "Pacheco (T)" },
-        { "materia": "GGF", "profesor": "Gamboa" }
-    ],
-    "MARTES": [
-        { "materia": "LIT", "profesor": "Perez Ramirez A (T)" },
-        { "materia": "HTR", "profesor": "Lucero Gianetti (T)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "IGS", "profesor": "Sanchez Carolina (P)" }, 
-        { "materia": "PYC", "profesor": "Armendano Benicio (T)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "IAQ", "profesor": "Pasalacua (TI)" }, 
-        { "materia": "MCS", "profesor": "Pereyra Manuel" }
-    ],
-    "VIERNES": [
-        { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
-        { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
-        { "materia": "EPO", "profesor": "Gonzalez Antonia (T)" }
-    ]
-},
-"6° 2°": {
-    "LUNES": [
-        { "materia": "HTR", "profesor": "Vaio Jorge" }, 
-        { "materia": "FIA", "profesor": "SEQUI Emilio" },
-        { "materia": "EFC", "profesor": "DUMONTET Gaston" }
-    ],
-    "MARTES": [
-        { "materia": "LIT", "profesor": "CARDILLO Paula" },
-        { "materia": "RTE", "profesor": "DELLAGIOVANNA Paola" }
-    ],
-    "MIERCOLES": [
-        { "materia": "TYC", "profesor": "Vaio Jorge" },
-        { "materia": "MCS", "profesor": "Motta Jorge" },
-        { "materia": "GGF", "profesor": "Ferreyra Maria" }
-    ],
-    "JUEVES": [
-        { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
-        { "materia": "PIC", "profesor": "MORAU Nestor" }
-    ],
-    "VIERNES": [
-        { "materia": "PIC", "profesor": "MORAU Nestor" },
-        { "materia": "MCS", "profesor": "Motta Jorge" }
-    ]
-},
-"1° 2°": {
-    "LUNES": [
-        { "materia": "PLG", "profesor": "Barbosa (S)" },
-        { "materia": "CNT", "profesor": "Leon Jimena (P)" },
-        { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "MARTES": [
-        { "materia": "CSC", "profesor": "Peña M Jose (T)" },
-        { "materia": "PLG", "profesor": "Barbosa (P)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "AMC", "profesor": "Garcia Lila (T)" },
-        { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "CNT", "profesor": "Leon Jimena (P)" },
-        { "materia": "MTM", "profesor": "LOPEZ Karina (TI)" },
-        { "materia": "CCD", "profesor": "Olivera Patricia (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "CSC", "profesor": "Peña M Jose (T)" },
-        { "materia": "", "profesor": "Torrez Janco (P)" } 
-    ]
-},
-"1° 3°": {
-    "LUNES": [
-        { "materia": "CSC", "profesor": "Vaio Jorge (T)" },
-        { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
-        { "materia": "CCD", "profesor": "Pacheco (T)" }
-    ],
-    "MARTES": [
-        { "materia": "AMC", "profesor": "Silva Florencia (T)" },
-        { "materia": "CSC", "profesor": "Vaio Jorge (T)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
-        { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "MTM", "profesor": "LOPEZ Karina " },
-        { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" },
-        { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "MTM", "profesor": "LOPEZ karina " },
-        { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" }
-    ]
-},
-"2° 2°": {
-    "LUNES": [
-        { "materia": "HTR", "profesor": "Peña M Jose (P)" },
-        { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }, 
-        { "materia": "CCD", "profesor": "Daglio (T)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-    ],
-    "MARTES": [
-        { "materia": "GGF", "profesor": "Ferreyra Maria (P)" }, 
-        { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "FQA", "profesor": "Iacobucci (T)" },
-        { "materia": "IGS", "profesor": "Yamuni M (P)" },
-        { "materia": "CCD", "profesor": "Daglio (T)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-    ],
-    "JUEVES": [
-        { "materia": "PLG", "profesor": "Roldan Camila (T)/CASAS" },
-        { "materia": "BLG", "profesor": "Degue Viviana (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "PLG", "profesor": "Roldan Camila (TI)" },
-        { "materia": "AMC", "profesor": "Coccaro Luciano (T)" },
-        { "materia": "MTM", "profesor": "Marquina Venero (P)" }
-    ]
-},
-"3° 2°": {
-    "LUNES": [
-        { "materia": "MTM", "profesor": "Pariachi W (P)" },
-        { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-    ],
-    "MARTES": [
-        { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
-        { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" }, 
-        { "materia": "CCD", "profesor": "Alvarez Fernando (T)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "MTM", "profesor": "Pariachi W (P)" },
-        { "materia": "IGS", "profesor": "Aceto Analia (P)" },
-        { "materia": "CCD", "profesor": "Alvarez Fernando (T)" },
-        { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-    ],
-    "JUEVES": [
-        { "materia": "BLG", "profesor": "Valentini E. (T)" },
-        { "materia": "FQA", "profesor": "Iacobucci (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "AMC", "profesor": "Aberasturi Javier (T)" },
-        { "materia": "HTR", "profesor": "Vaio Jorge (P)" }
-    ]
-},
-"2° 3°": {
-    "LUNES": [
-        { "materia": "PLG", "profesor": "Barbosa (T)" },
-        { "materia": "HTR", "profesor": "Poblete Daniela (T)" },
-        { "materia": "CCD", "profesor": "Pacheco (T)" }
-    ],
-    "MARTES": [
-        { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" },
-        { "materia": "BLG", "profesor": "Degue Viviana (P)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "FQA", "profesor": "Solle G (T)/Pariachi (S)" },
-        { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }, 
-        { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "MTM", "profesor": "Marquina Venero (P)" },
-        { "materia": "PGL", "profesor": "Barbosa (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "AMC", "profesor": "Tambour Carlo (T)" },
-        { "materia": "MTM", "profesor": "Marquina Venero (P)" }
-    ]
-},
-"4° 2°": {
-    "LUNES": [
-        { "materia": "SYA", "profesor": "Videla Estela (T)" },
-        { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
-        { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
-    ],
-    "MARTES": [
-        { "materia": "BLG", "profesor": "Karlen Lucia (T)" },
-        { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }
-    ],
-    "MIERCOLES": [
-        { "materia": "PSI", "profesor": "Fajre M E (T)" },
-        { "materia": "LIT", "profesor": "BARBOSA INDIANA(S)" },
-        { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "IAF", "profesor": "Iacobucci (T)" },
-        { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
-    ],
-    "VIERNES": [
-        { "materia": "NTI", "profesor": "Molina M (T)" },
-        { "materia": "MTM", "profesor": "Tiziano M (TI)" }
-    ]
-},
-"5° 1°": {
-    "LUNES": [
-        { "materia": "CCD", "profesor": "Pacheco (T)" },
-        { "materia": "SOC", "profesor": "Orsi Pablo" }
-    ],
-    "MARTES": [
-        { "materia": "EPO", "profesor": "Bianco Walter (T)" },
-        { "materia": "IGS", "profesor": "Etchegaray Maria (P)" } 
-    ],
-    "MIERCOLES": [
-        { "materia": "MCS", "profesor": "Gomez Natalia (T)/Sommariva (S)" },
-        { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
-        { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-    ],
-    "JUEVES": [
-        { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" },
-        { "materia": "IAQ", "profesor": "Gimenez Juana (T)" }
-    ],
-    "VIERNES": [
-        { "materia": "PYC", "profesor": "Mendez Mariano (T)" },
-        { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
-    ]
-},
-"6° 1°": {
-    "LUNES": [
-        { "materia": "FIA", "profesor": "Diaz Odina (T)/Bastias Francisco (S)" },
-        { "materia": "RTE", "profesor": "Morette Maria (T)" },
-        { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" }
-    ],
-    "MARTES": [
-        { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
-        { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
-        { "materia": "MCM", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-    ],
-    "MIERCOLES": [
-        { "materia": "TYC", "profesor": "Payares Gaston (T)" },
-        { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
-        { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-    ],
-    "JUEVES": [
-        { "materia": "GGF", "profesor": "Perez Norma (P)" },
-        { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" }
-    ],
-    "VIERNES": [
-        { "materia": "PIC", "profesor": "Villar Lidia (T)" },
-        { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" },
-        { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-    ]
-}
-
+            "LUNES": [
+                { "materia": "CNT", "profesor": "Pasalacua (T)" },
+                { "materia": "PLG", "profesor": "Barbosa (T)" },
+                { "materia": "EF", "profesor": "Miguel Pablo (S)" }, 
+                { "materia": "CCD", "profesor": "Daglio (T)" }
+            ],
+            "MARTES": [
+                { "materia": "CSC", "profesor": "Alvarez Daniel (T)" },
+                { "materia": "MTM", "profesor": "Crivaro (T)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "CNT", "profesor": "Pasalacua (T)" },
+                { "materia": "MTM", "profesor": "Crivaro (T)" },
+                { "materia": "EFC", "profesor": "Miguel Pablo (S)" }
+            ],
+            "JUEVES": [
+                { "materia": "IGS", "profesor": "Cernada (P)" },
+                { "materia": "PLG", "profesor": "Barbosa (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "AMC", "profesor": "Lirussi (S)" },
+                { "materia": "CSC", "profesor": "Alvarez Daniel (T)" }
+            ]
+        },
+        "2° 1°": {
+            "LUNES": [
+                { "materia": "PLG", "profesor": "Ramirez Lurdes (S)" },
+                { "materia": "FQA", "profesor": "Iacobucci (T)" },
+                { "materia": "CCD", "profesor": "Daglio (T)" }
+            ],
+            "MARTES": [
+                { "materia": "HTR", "profesor": "Lucero Gianetti (T)" }, 
+                { "materia": "AMC", "profesor": "Artola (T)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "BLG", "profesor": "Gerhardt (T)" },
+                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "MTM", "profesor": "Motta Jorge (P)" }, 
+                { "materia": "PLG", "profesor": "Cardillo (S)" }
+            ],
+            "VIERNES": [
+                { "materia": "MTM", "profesor": "Motta Jorge (P)" },
+                { "materia": "GGF", "profesor": "Almada Catalina (TI)" } 
+            ]
+        },
+        "3° 1°": {
+            "LUNES": [
+                { "materia": "FQA", "profesor": "Iacobucci (T)" },
+                { "materia": "BLG", "profesor": "Gerhardt (T)" },
+                { "materia": "CCD", "profesor": "Capecce (P)" }
+            ],
+            "MARTES": [
+                { "materia": "AMC", "profesor": "Pulsen Victor(S)" },
+                { "materia": "GGF", "profesor": "Echeverry (S)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" },
+                { "materia": "IGS", "profesor": "Sanchez Carolina (P)" },
+                { "materia": "CCD", "profesor": "Capecce" }
+            ],
+            "JUEVES": [
+                { "materia": "PLG", "profesor": "Cardillo (S)" },
+                { "materia": "MTM", "profesor": "Coronel Emilia (P)" }
+            ],
+            "VIERNES": [
+                { "materia": "HTR", "profesor": "Etcheverry (S)" },
+                { "materia": "MTM", "profesor": "Coronel Emilia (P)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
+            ]
+        },
+        "4° 1°": {
+            "LUNES": [
+                { "materia": "SYA", "profesor": "Miranda Ag (TI)" },
+                { "materia": "LIT", "profesor": "Cardillo (S)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "MARTES": [
+                { "materia": "NTI", "profesor": "Crivaro (T)" },
+                { "materia": "IAF", "profesor": "Torrez Janco (P)" },
+                { "materia": "GGF", "profesor": "Ferreyra Maria" } 
+            ],
+            "MIERCOLES": [
+                { "materia": "HTR", "profesor": "Esquiros (S)" },
+                { "materia": "PLG", "profesor": "Cardillo (S)" },
+                { "materia": "BLG", "profesor": "Karlen Lucia (T)" }, 
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "PSI", "profesor": "Cateriano Claudia (T)" },
+                { "materia": "MCS", "profesor": "Motta Jorge (S)" },
+                { "materia": "MCS", "profesor": "Motta Jorge (S)" }
+            ],
+            "VIERNES": [
+                { "materia": "GGF", "profesor": "Ferreyra Maria (P)" },
+                { "materia": "HTR", "profesor": "Esquiroz (P)" },
+                { "materia": "IGS", "profesor": "Soleto Daniela (P)" }
+            ]
+        },
+        "5° 2°": {
+            "LUNES": [
+                { "materia": "CCD", "profesor": "Pacheco (T)" },
+                { "materia": "GGF", "profesor": "Gamboa" }
+            ],
+            "MARTES": [
+                { "materia": "LIT", "profesor": "Perez Ramirez A (T)" },
+                { "materia": "HTR", "profesor": "Lucero Gianetti (T)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "IGS", "profesor": "Sanchez Carolina (P)" }, 
+                { "materia": "PYC", "profesor": "Armendano Benicio (T)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "IAQ", "profesor": "Pasalacua (TI)" }, 
+                { "materia": "MCS", "profesor": "Pereyra Manuel" }
+            ],
+            "VIERNES": [
+                { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
+                { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
+                { "materia": "EPO", "profesor": "Gonzalez Antonia (T)" }
+            ]
+        },
+        "6° 2°": {
+            "LUNES": [
+                { "materia": "HTR", "profesor": "Vaio Jorge" }, 
+                { "materia": "FIA", "profesor": "SEQUI Emilio" },
+                { "materia": "EFC", "profesor": "DUMONTET Gaston" }
+            ],
+            "MARTES": [
+                { "materia": "LIT", "profesor": "CARDILLO Paula" },
+                { "materia": "RTE", "profesor": "DELLAGIOVANNA Paola" }
+            ],
+            "MIERCOLES": [
+                { "materia": "TYC", "profesor": "Vaio Jorge" },
+                { "materia": "MCS", "profesor": "Motta Jorge" },
+                { "materia": "GGF", "profesor": "Ferreyra Maria" }
+            ],
+            "JUEVES": [
+                { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
+                { "materia": "PIC", "profesor": "MORAU Nestor" }
+            ],
+            "VIERNES": [
+                { "materia": "PIC", "profesor": "MORAU Nestor" },
+                { "materia": "MCS", "profesor": "Motta Jorge" }
+            ]
+        },
+        "1° 2°": {
+            "LUNES": [
+                { "materia": "PLG", "profesor": "Barbosa (S)" },
+                { "materia": "CNT", "profesor": "Leon Jimena (P)" },
+                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "MARTES": [
+                { "materia": "CSC", "profesor": "Peña M Jose (T)" },
+                { "materia": "PLG", "profesor": "Barbosa (P)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "AMC", "profesor": "Garcia Lila (T)" },
+                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "CNT", "profesor": "Leon Jimena (P)" },
+                { "materia": "MTM", "profesor": "LOPEZ Karina (TI)" },
+                { "materia": "CCD", "profesor": "Olivera Patricia (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "CSC", "profesor": "Peña M Jose (T)" },
+                { "materia": "", "profesor": "Torrez Janco (P)" } 
+            ]
+        },
+        "1° 3°": {
+            "LUNES": [
+                { "materia": "CSC", "profesor": "Vaio Jorge (T)" },
+                { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
+                { "materia": "CCD", "profesor": "Pacheco (T)" }
+            ],
+            "MARTES": [
+                { "materia": "AMC", "profesor": "Silva Florencia (T)" },
+                { "materia": "CSC", "profesor": "Vaio Jorge (T)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
+                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "MTM", "profesor": "LOPEZ Karina " },
+                { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" },
+                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "MTM", "profesor": "LOPEZ karina " },
+                { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" }
+            ]
+        },
+        "2° 2°": {
+            "LUNES": [
+                { "materia": "HTR", "profesor": "Peña M Jose (P)" },
+                { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }, 
+                { "materia": "CCD", "profesor": "Daglio (T)" },
+                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
+            ],
+            "MARTES": [
+                { "materia": "GGF", "profesor": "Ferreyra Maria (P)" }, 
+                { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "FQA", "profesor": "Iacobucci (T)" },
+                { "materia": "IGS", "profesor": "Yamuni M (P)" },
+                { "materia": "CCD", "profesor": "Daglio (T)" },
+                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
+            ],
+            "JUEVES": [
+                { "materia": "PLG", "profesor": "Roldan Camila (T)/CASAS" },
+                { "materia": "BLG", "profesor": "Degue Viviana (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "PLG", "profesor": "Roldan Camila (TI)" },
+                { "materia": "AMC", "profesor": "Coccaro Luciano (T)" },
+                { "materia": "MTM", "profesor": "Marquina Venero (P)" }
+            ]
+        },
+        "3° 2°": {
+            "LUNES": [
+                { "materia": "MTM", "profesor": "Pariachi W (P)" },
+                { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
+                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
+            ],
+            "MARTES": [
+                { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
+                { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" }, 
+                { "materia": "CCD", "profesor": "Alvarez Fernando (T)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "MTM", "profesor": "Pariachi W (P)" },
+                { "materia": "IGS", "profesor": "Aceto Analia (P)" },
+                { "materia": "CCD", "profesor": "Alvarez Fernando (T)" },
+                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
+            ],
+            "JUEVES": [
+                { "materia": "BLG", "profesor": "Valentini E. (T)" },
+                { "materia": "FQA", "profesor": "Iacobucci (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "AMC", "profesor": "Aberasturi Javier (T)" },
+                { "materia": "HTR", "profesor": "Vaio Jorge (P)" }
+            ]
+        },
+        "2° 3°": {
+            "LUNES": [
+                { "materia": "PLG", "profesor": "Barbosa (T)" },
+                { "materia": "HTR", "profesor": "Poblete Daniela (T)" },
+                { "materia": "CCD", "profesor": "Pacheco (T)" }
+            ],
+            "MARTES": [
+                { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" },
+                { "materia": "BLG", "profesor": "Degue Viviana (P)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "FQA", "profesor": "Solle G (T)/Pariachi (S)" },
+                { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }, 
+                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "MTM", "profesor": "Marquina Venero (P)" },
+                { "materia": "PGL", "profesor": "Barbosa (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "AMC", "profesor": "Tambour Carlo (T)" },
+                { "materia": "MTM", "profesor": "Marquina Venero (P)" }
+            ]
+        },
+        "4° 2°": {
+            "LUNES": [
+                { "materia": "SYA", "profesor": "Videla Estela (T)" },
+                { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
+                { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
+            ],
+            "MARTES": [
+                { "materia": "BLG", "profesor": "Karlen Lucia (T)" },
+                { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }
+            ],
+            "MIERCOLES": [
+                { "materia": "PSI", "profesor": "Fajre M E (T)" },
+                { "materia": "LIT", "profesor": "BARBOSA INDIANA(S)" },
+                { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "IAF", "profesor": "Iacobucci (T)" },
+                { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
+            ],
+            "VIERNES": [
+                { "materia": "NTI", "profesor": "Molina M (T)" },
+                { "materia": "MTM", "profesor": "Tiziano M (TI)" }
+            ]
+        },
+        "5° 1°": {
+            "LUNES": [
+                { "materia": "CCD", "profesor": "Pacheco (T)" },
+                { "materia": "SOC", "profesor": "Orsi Pablo" }
+            ],
+            "MARTES": [
+                { "materia": "EPO", "profesor": "Bianco Walter (T)" },
+                { "materia": "IGS", "profesor": "Etchegaray Maria (P)" } 
+            ],
+            "MIERCOLES": [
+                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Sommariva (S)" },
+                { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
+                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
+            ],
+            "JUEVES": [
+                { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" },
+                { "materia": "IAQ", "profesor": "Gimenez Juana (T)" }
+            ],
+            "VIERNES": [
+                { "materia": "PYC", "profesor": "Mendez Mariano (T)" },
+                { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
+            ]
+        },
+        "6° 1°": {
+            "LUNES": [
+                { "materia": "FIA", "profesor": "Diaz Odina (T)/Bastias Francisco (S)" },
+                { "materia": "RTE", "profesor": "Morette Maria (T)" },
+                { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" }
+            ],
+            "MARTES": [
+                { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
+                { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
+                { "materia": "MCM", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
+            ],
+            "MIERCOLES": [
+                { "materia": "TYC", "profesor": "Payares Gaston (T)" },
+                { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
+                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
+            ],
+            "JUEVES": [
+                { "materia": "GGF", "profesor": "Perez Norma (P)" },
+                { "materia": "LIT", "profesor": "BARBOSA INDIANA (S)" }
+            ],
+            "VIERNES": [
+                { "materia": "PIC", "profesor": "Villar Lidia (T)" },
+                { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" },
+                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
+            ]
+        }
     };
-    // Suplentes por materia (opcional, si no tienes, déjalo vacío)
+
+    // Suplentes por materia (si tienes suplentes predefinidos por materia)
     const suplentesPorMateria = {
-        // ... objetos suplentes si los tienes ...
+        // Ejemplo:
+        // "Matemáticas": ["Carlos", "Luisa"],
+        // "Historia": ["Pedro", "Marta"],
     };
     
     // Lista de cursos disponibles
@@ -392,154 +395,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.faltas = faltas;
     window.cursosSeleccionados = cursosSeleccionados;
 
-    // --------------------- Reemplazo de Profesores ---------------------
-    const selectCursoReemplazo = document.getElementById('selectCursoReemplazo');
-    const selectDiaReemplazo = document.getElementById('selectDiaReemplazo');
-    const selectMateriaReemplazo = document.getElementById('selectMateriaReemplazo');
-    const profesorActualReemplazo = document.getElementById('profesorActualReemplazo');
-    const profesorNuevoReemplazo = document.getElementById('profesorNuevoReemplazo');
-    const btnAplicarReemplazo = document.getElementById('btnAplicarReemplazo');
-
-    // Poblar el selector de cursos para reemplazo
-    function poblarSelectorCursoReemplazoFunc() {
-        selectCursoReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-        cursosDisponibles.forEach(curso => {
-            const option = document.createElement('option');
-            option.value = curso;
-            option.textContent = curso.toUpperCase();
-            selectCursoReemplazo.appendChild(option);
-        });
-    }
-
-    // Al cambiar de curso, habilitar el selector de día
-    selectCursoReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        poblarSelectorDiaReemplazoFunc(cursoSeleccionado);
-    });
-
-    // Poblar el selector de día en base al curso
-    function poblarSelectorDiaReemplazoFunc(curso) {
-        selectDiaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona un día</option>';
-        selectDiaReemplazo.disabled = false;
-
-        // Días fijos
-        const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
-        const horarioCurso = horarioPorCurso[curso];
-
-        dias.forEach(dia => {
-            if (horarioCurso[dia] && horarioCurso[dia].length > 0) {
-                const option = document.createElement('option');
-                option.value = dia;
-                option.textContent = dia;
-                selectDiaReemplazo.appendChild(option);
-            }
-        });
-    }
-
-    // Al cambiar de día, habilitar el selector de materia
-    selectDiaReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        const diaSeleccionado = selectDiaReemplazo.value;
-        poblarSelectorMateriaReemplazoFunc(cursoSeleccionado, diaSeleccionado);
-    });
-
-    // Poblar el selector de materia en base al curso y día
-    function poblarSelectorMateriaReemplazoFunc(curso, dia) {
-        selectMateriaReemplazo.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectMateriaReemplazo.disabled = false;
-
-        const materias = horarioPorCurso[curso][dia] || [];
-        materias.forEach(materiaObj => {
-            const option = document.createElement('option');
-            option.value = materiaObj.materia; 
-            option.textContent = materiaObj.materia;
-            selectMateriaReemplazo.appendChild(option);
-        });
-    }
-
-    // Al cambiar de materia, mostrar el profesor actual
-    selectMateriaReemplazo.addEventListener('change', () => {
-        const cursoSeleccionado = selectCursoReemplazo.value;
-        const diaSeleccionado = selectDiaReemplazo.value;
-        const materiaSeleccionada = selectMateriaReemplazo.value;
-
-        const materias = horarioPorCurso[cursoSeleccionado][diaSeleccionado];
-        const materiaEncontrada = materias.find(m => m.materia === materiaSeleccionada);
-        if (materiaEncontrada) {
-            profesorActualReemplazo.value = materiaEncontrada.profesor;
-        }
-    });
-
-    // Función para aplicar el reemplazo
-    btnAplicarReemplazo.addEventListener('click', () => {
-        const curso = selectCursoReemplazo.value;
-        const dia = selectDiaReemplazo.value;
-        const materia = selectMateriaReemplazo.value;
-        const profesorViejo = profesorActualReemplazo.value;
-        const profesorNuevo = profesorNuevoReemplazo.value.trim();
-
-        if (!curso || !dia || !materia || !profesorViejo || !profesorNuevo) {
-            alert('Por favor, selecciona todos los campos y escribe el nombre del nuevo profesor.');
-            return;
-        }
-
-        // Llamamos a una función que reemplace el profesor en la estructura y transfiere faltas
-        reemplazarProfesor(horarioPorCurso, curso, dia, materia, profesorViejo, profesorNuevo);
-        displayPlanilla(); // Refrescar la vista
-
-        alert(`Profesor reemplazado: "${profesorViejo}" por "${profesorNuevo}" en ${curso}, ${dia}, materia ${materia}.`);
-        profesorNuevoReemplazo.value = ''; // Limpiar el campo
-    });
-
-    // Función para reemplazar el profesor en una materia específica y transferir faltas
-    function reemplazarProfesor(horario, curso, dia, materia, profesorViejo, profesorNuevo) {
-        const materias = horario[curso][dia];
-        const materiaObj = materias.find(m => m.materia === materia);
-        if (materiaObj && materiaObj.profesor === profesorViejo) {
-            materiaObj.profesor = profesorNuevo;
-        } else {
-            alert('El profesor antiguo no coincide con el profesor asignado a la materia.');
-            return;
-        }
-
-        // Transferir faltas del profesor viejo al nuevo
-        if (faltas[profesorViejo]) {
-            if (!faltas[profesorNuevo]) {
-                faltas[profesorNuevo] = {};
-            }
-            // Transferir todas las faltas
-            for (const mes in faltas[profesorViejo]) {
-                if (!faltas[profesorNuevo][mes]) {
-                    faltas[profesorNuevo][mes] = {};
-                }
-                for (const diaFalta in faltas[profesorViejo][mes]) {
-                    if (!faltas[profesorNuevo][mes][diaFalta]) {
-                        faltas[profesorNuevo][mes][diaFalta] = {};
-                    }
-                    for (const motivo in faltas[profesorViejo][mes][diaFalta]) {
-                        if (!faltas[profesorNuevo][mes][diaFalta][motivo]) {
-                            faltas[profesorNuevo][mes][diaFalta][motivo] = {};
-                        }
-                        for (const cursoFalta in faltas[profesorViejo][mes][diaFalta][motivo]) {
-                            if (!faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta]) {
-                                faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] = 0;
-                            }
-                            faltas[profesorNuevo][mes][diaFalta][motivo][cursoFalta] += faltas[profesorViejo][mes][diaFalta][motivo][cursoFalta];
-                        }
-                    }
-                }
-            }
-            // Eliminar faltas del profesor viejo
-            delete faltas[profesorViejo];
-            guardarFaltas();
-        }
-    }
+    // --------------------- Registrar Falta al Hacer Clic en el Profesor ---------------------
+    // No se necesita un modal adicional, ya que se usará el modal principal
+    // Asumimos que las filas de profesores ya están creadas en la planilla
 
     // --------------------- Funciones Generales ---------------------
     // Función para obtener el mes seleccionado
     function obtenerMesSeleccionado() {
         const selectorMes = document.getElementById('selectorMes');
         return selectorMes ? selectorMes.value : `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+    }
+
+    // Función para obtener el número de días de un mes
+    function obtenerNumeroDias(mes) {
+        const [anio, mesNumero] = mes.split('-').map(Number);
+        return new Date(anio, mesNumero, 0).getDate();
     }
 
     // Mostrar selección de cursos
@@ -610,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
             thead.classList.add('table-dark');
             const encabezadoFila = document.createElement('tr');
 
-            const columnas = ['Día', 'Materia', 'Profesor'];
+            const columnas = ['Día', 'Número del Día', 'Materia', 'Profesor'];
             columnas.forEach(columna => {
                 const th = document.createElement('th');
                 th.textContent = columna;
@@ -624,23 +494,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const tbody = document.createElement('tbody');
             const dias = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES'];
             const mesActual = obtenerMesSeleccionado();
-            
+
             dias.forEach(dia => {
                 const materias = horarioPorCurso[curso][dia] || [];
 
                 materias.forEach((materiaObj) => {
                     const fila = document.createElement('tr');
 
+                    // Día de la Semana
                     const celdaDia = document.createElement('td');
                     celdaDia.textContent = dia;
                     celdaDia.classList.add('celda-dia');
                     fila.appendChild(celdaDia);
 
+                    // Número del Día
+                    const celdaNumeroDia = document.createElement('td');
+                    celdaNumeroDia.textContent = '—'; // Placeholder, se actualizará si hay faltas
+                    celdaNumeroDia.classList.add('celda-numero-dia');
+                    fila.appendChild(celdaNumeroDia);
+
+                    // Materia
                     const celdaMateria = document.createElement('td');
                     celdaMateria.textContent = materiaObj.materia;
                     celdaMateria.classList.add('celda-materia');
                     fila.appendChild(celdaMateria);
 
+                    // Profesor
                     const celdaProfesor = document.createElement('td');
                     celdaProfesor.textContent = materiaObj.profesor;
                     celdaProfesor.classList.add('celda-profesor');
@@ -653,6 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
                         profesorSeleccionado.value = nombreProfesor;
                         diaSeleccionado.value = dia;
+                        numeroDiaSeleccionado.value = ''; // Limpiar el número del día
                         motivoSeleccionado.value = '';
                         cantidadSeleccionada.value = '1';
                         cursoSeleccionadoModal.value = curso; // Asignar el curso al input hidden
@@ -661,15 +541,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Marcar fila si hay faltas
                     if (faltas[materiaObj.profesor] && faltas[materiaObj.profesor][mesActual] && faltas[materiaObj.profesor][mesActual][dia]) {
-                        for (const motivo in faltas[materiaObj.profesor][mesActual][dia]) {
-                            for (const cursoF in faltas[materiaObj.profesor][mesActual][dia][motivo]) {
-                                const cantidad = faltas[materiaObj.profesor][mesActual][dia][motivo][cursoF];
-                                if (cantidad > 0 && cursoF === curso) {
-                                    fila.classList.add('fila-ausente');
-                                    break; // No es necesario seguir buscando
+                        for (const numeroDia in faltas[materiaObj.profesor][mesActual][dia]) {
+                            for (const motivo in faltas[materiaObj.profesor][mesActual][dia][numeroDia]) {
+                                for (const cursoF in faltas[materiaObj.profesor][mesActual][dia][numeroDia][motivo]) {
+                                    const cantidad = faltas[materiaObj.profesor][mesActual][dia][numeroDia][motivo][cursoF];
+                                    if (cantidad > 0 && cursoF === curso) {
+                                        fila.classList.add('fila-ausente');
+                                        celdaNumeroDia.textContent = numeroDia; // Mostrar el número del día
+                                        break; // No es necesario seguir buscando
+                                    }
                                 }
                             }
                         }
+                    }
+
+                    // Marcar fila si es suplente
+                    if (materiaObj.profesor.includes('(S)')) {
+                        fila.classList.add('fila-suplente');
                     }
 
                     tbody.appendChild(fila);
@@ -686,24 +574,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Registrar ausencia
-    function registrarAusencia(docente, mes, dia, motivo, cantidad, curso = null) {
+    function registrarAusencia(docente, mes, dia, numeroDia, motivo, cantidad, curso = null) {
         try {
             if (curso) {
                 if (!faltas[docente]) faltas[docente] = {};
                 if (!faltas[docente][mes]) faltas[docente][mes] = {};
                 if (!faltas[docente][mes][dia]) faltas[docente][mes][dia] = {};
-                if (!faltas[docente][mes][dia][motivo]) faltas[docente][mes][dia][motivo] = {};
-                if (!faltas[docente][mes][dia][motivo][curso]) faltas[docente][mes][dia][motivo][curso] = 0;
-                faltas[docente][mes][dia][motivo][curso] += cantidad;
+                if (!faltas[docente][mes][dia][numeroDia]) faltas[docente][mes][dia][numeroDia] = {};
+                if (!faltas[docente][mes][dia][numeroDia][motivo]) faltas[docente][mes][dia][numeroDia][motivo] = {};
+                if (!faltas[docente][mes][dia][numeroDia][motivo][curso]) faltas[docente][mes][dia][numeroDia][motivo][curso] = 0;
+                faltas[docente][mes][dia][numeroDia][motivo][curso] += cantidad;
             } else {
                 // Para todos los cursos seleccionados
                 cursosSeleccionados.forEach(c => {
                     if (!faltas[docente]) faltas[docente] = {};
                     if (!faltas[docente][mes]) faltas[docente][mes] = {};
                     if (!faltas[docente][mes][dia]) faltas[docente][mes][dia] = {};
-                    if (!faltas[docente][mes][dia][motivo]) faltas[docente][mes][dia][motivo] = {};
-                    if (!faltas[docente][mes][dia][motivo][c]) faltas[docente][mes][dia][motivo][c] = 0;
-                    faltas[docente][mes][dia][motivo][c] += cantidad;
+                    if (!faltas[docente][mes][dia][numeroDia]) faltas[docente][mes][dia][numeroDia] = {};
+                    if (!faltas[docente][mes][dia][numeroDia][motivo]) faltas[docente][mes][dia][numeroDia][motivo] = {};
+                    if (!faltas[docente][mes][dia][numeroDia][motivo][c]) faltas[docente][mes][dia][numeroDia][motivo][c] = 0;
+                    faltas[docente][mes][dia][numeroDia][motivo][c] += cantidad;
                 });
             }
 
@@ -718,15 +608,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Eliminar ausencia
-    function removeAusencia(docente, mes, dia, motivo, curso) {
-        if (motivo && curso) {
-            if (faltas[docente] && faltas[docente][mes] && faltas[docente][mes][dia] && faltas[docente][mes][dia][motivo] && faltas[docente][mes][dia][motivo][curso]) {
-                faltas[docente][mes][dia][motivo][curso] -= 1;
-                if (faltas[docente][mes][dia][motivo][curso] <= 0) {
-                    delete faltas[docente][mes][dia][motivo][curso];
+    function removeAusencia(docente, mes, dia, numeroDia, motivo, curso) {
+        if (motivo && curso && numeroDia) {
+            if (faltas[docente] && faltas[docente][mes] && faltas[docente][mes][dia] && faltas[docente][mes][dia][numeroDia] && faltas[docente][mes][dia][numeroDia][motivo] && faltas[docente][mes][dia][numeroDia][motivo][curso]) {
+                faltas[docente][mes][dia][numeroDia][motivo][curso] -= 1;
+                if (faltas[docente][mes][dia][numeroDia][motivo][curso] <= 0) {
+                    delete faltas[docente][mes][dia][numeroDia][motivo][curso];
                 }
-                if (Object.keys(faltas[docente][mes][dia][motivo]).length === 0) {
-                    delete faltas[docente][mes][dia][motivo];
+                if (Object.keys(faltas[docente][mes][dia][numeroDia][motivo]).length === 0) {
+                    delete faltas[docente][mes][dia][numeroDia][motivo];
+                }
+                if (Object.keys(faltas[docente][mes][dia][numeroDia]).length === 0) {
+                    delete faltas[docente][mes][dia][numeroDia];
                 }
                 if (Object.keys(faltas[docente][mes][dia]).length === 0) {
                     delete faltas[docente][mes][dia];
@@ -766,31 +659,33 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const docente in faltas) {
             for (const mes in faltas[docente]) {
                 for (const dia in faltas[docente][mes]) {
-                    for (const motivo in faltas[docente][mes][dia]) {
-                        for (const curso in faltas[docente][mes][dia][motivo]) {
-                            const cantidad = faltas[docente][mes][dia][motivo][curso];
-                            const item = document.createElement('li');
-                            item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-                            item.textContent = `${docente} - Curso: ${curso} - ${mes}-${dia} - ${motivo}`;
+                    for (const numeroDia in faltas[docente][mes][dia]) {
+                        for (const motivo in faltas[docente][mes][dia][numeroDia]) {
+                            for (const curso in faltas[docente][mes][dia][numeroDia][motivo]) {
+                                const cantidad = faltas[docente][mes][dia][numeroDia][motivo][curso];
+                                const item = document.createElement('li');
+                                item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                                item.textContent = `${docente} - Curso: ${curso} - ${mes}-${dia} (${numeroDia}) - ${motivo}`;
 
-                            const badge = document.createElement('span');
-                            badge.classList.add('badge', 'bg-danger', 'rounded-pill');
-                            badge.textContent = cantidad;
+                                const badge = document.createElement('span');
+                                badge.classList.add('badge', 'bg-danger', 'rounded-pill');
+                                badge.textContent = cantidad;
 
-                            const eliminarIcono = document.createElement('i');
-                            eliminarIcono.classList.add('fas', 'fa-trash-alt', 'remove-falta');
-                            eliminarIcono.title = 'Eliminar Falta';
-                            eliminarIcono.style.cursor = 'pointer';
-                            eliminarIcono.style.marginLeft = '10px';
-                            eliminarIcono.addEventListener('click', () => {
-                                removeAusencia(docente, mes, dia, motivo, curso);
-                            });
+                                const eliminarIcono = document.createElement('i');
+                                eliminarIcono.classList.add('fas', 'fa-trash-alt', 'remove-falta');
+                                eliminarIcono.title = 'Eliminar Falta';
+                                eliminarIcono.style.cursor = 'pointer';
+                                eliminarIcono.style.marginLeft = '10px';
+                                eliminarIcono.addEventListener('click', () => {
+                                    removeAusencia(docente, mes, dia, numeroDia, motivo, curso);
+                                });
 
-                            const container = document.createElement('div');
-                            container.appendChild(badge);
-                            container.appendChild(eliminarIcono);
-                            item.appendChild(container);
-                            lista.appendChild(item);
+                                const container = document.createElement('div');
+                                container.appendChild(badge);
+                                container.appendChild(eliminarIcono);
+                                item.appendChild(container);
+                                lista.appendChild(item);
+                            }
                         }
                     }
                 }
@@ -822,9 +717,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (faltas[profesor]) {
                 for (const mes in faltas[profesor]) {
                     for (const dia in faltas[profesor][mes]) {
-                        for (const motivo in faltas[profesor][mes][dia]) {
-                            for (const cursoFaltas in faltas[profesor][mes][dia][motivo]) {
-                                totalFaltas += faltas[profesor][mes][dia][motivo][cursoFaltas];
+                        for (const numeroDia in faltas[profesor][mes][dia]) {
+                            for (const motivo in faltas[profesor][mes][dia][numeroDia]) {
+                                for (const cursoFalta in faltas[profesor][mes][dia][numeroDia][motivo]) {
+                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFalta];
+                                }
                             }
                         }
                     }
@@ -875,8 +772,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 materias.forEach(materiaObj => {
                     pdf.setFontSize(12);
                     pdf.text(`Día: ${dia}`, 10, yOffset);
-                    pdf.text(`Materia: ${materiaObj.materia}`, 60, yOffset);
-                    pdf.text(`Profesor: ${materiaObj.profesor}`, 120, yOffset);
+                    pdf.text(`Número del Día: —`, 60, yOffset); // Placeholder
+                    pdf.text(`Materia: ${materiaObj.materia}`, 100, yOffset);
+                    pdf.text(`Profesor: ${materiaObj.profesor}`, 150, yOffset);
                     yOffset += 7;
                     if (yOffset > 270) {
                         pdf.addPage();
@@ -903,9 +801,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (faltas[profesor]) {
                 for (const mes in faltas[profesor]) {
                     for (const dia in faltas[profesor][mes]) {
-                        for (const motivo in faltas[profesor][mes][dia]) {
-                            for (const cursoFaltas in faltas[profesor][mes][dia][motivo]) {
-                                totalFaltas += faltas[profesor][mes][dia][motivo][cursoFaltas];
+                        for (const numeroDia in faltas[profesor][mes][dia]) {
+                            for (const motivo in faltas[profesor][mes][dia][numeroDia]) {
+                                for (const cursoFalta in faltas[profesor][mes][dia][numeroDia][motivo]) {
+                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFalta];
+                                }
                             }
                         }
                     }
@@ -941,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 materias.forEach(materiaObj => {
                     dataTodosCursos.push({
                         "Día": dia,
+                        "Número del Día": "—", // Placeholder, puedes actualizar si tienes la información
                         "Materia": materiaObj.materia,
                         "Profesor": materiaObj.profesor
                     });
@@ -956,17 +857,20 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const docente in faltas) {
             for (const mes in faltas[docente]) {
                 for (const dia in faltas[docente][mes]) {
-                    for (const motivo in faltas[docente][mes][dia]) {
-                        for (const curso in faltas[docente][mes][dia][motivo]) {
-                            const cantidad = faltas[docente][mes][dia][motivo][curso];
-                            faltasData.push({
-                                "Docente": docente,
-                                "Curso": curso,
-                                "Mes": mes,
-                                "Día": dia,
-                                "Motivo": motivo,
-                                "Cantidad de Faltas": cantidad
-                            });
+                    for (const numeroDia in faltas[docente][mes][dia]) {
+                        for (const motivo in faltas[docente][mes][dia][numeroDia]) {
+                            for (const curso in faltas[docente][mes][dia][numeroDia][motivo]) {
+                                const cantidad = faltas[docente][mes][dia][numeroDia][motivo][curso];
+                                faltasData.push({
+                                    "Docente": docente,
+                                    "Curso": curso,
+                                    "Mes": mes,
+                                    "Día": dia,
+                                    "Número del Día": numeroDia,
+                                    "Motivo": motivo,
+                                    "Cantidad de Faltas": cantidad
+                                });
+                            }
                         }
                     }
                 }
@@ -983,14 +887,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (faltas[profesor]) {
                 for (const mes in faltas[profesor]) {
                     for (const dia in faltas[profesor][mes]) {
-                        for (const motivo in faltas[profesor][mes][dia]) {
-                            for (const cursoFaltas in faltas[profesor][mes][dia][motivo]) {
-                                totalFaltas += faltas[profesor][mes][dia][motivo][cursoFaltas];
+                        for (const numeroDia in faltas[profesor][mes][dia]) {
+                            for (const motivo in faltas[profesor][mes][dia][numeroDia]) {
+                                for (const cursoFalta in faltas[profesor][mes][dia][numeroDia][motivo]) {
+                                    totalFaltas += faltas[profesor][mes][dia][numeroDia][motivo][cursoFalta];
+                                }
                             }
                         }
                     }
                 }
             }
+
             contadorTotalData.push({
                 "Docente": profesor,
                 "Total Faltas": totalFaltas
@@ -1039,7 +946,6 @@ document.addEventListener('DOMContentLoaded', () => {
     exportarTotalButton.addEventListener('click', exportarTotal);
 
     // --------------------- Inicialización ---------------------
-    poblarSelectorCursoReemplazoFunc();
     displayCursoSelection();
     displayPlanilla();
     mostrarResumenFaltasList();
@@ -1050,180 +956,26 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const docente = profesorSeleccionado.value;
         const dia = diaSeleccionado.value;
+        const numeroDia = parseInt(numeroDiaSeleccionado.value, 10);
         const mes = obtenerMesSeleccionado();
         const motivo = motivoSeleccionado.value.trim();
         const cantidad = parseInt(cantidadSeleccionada.value, 10);
         const curso = cursoSeleccionadoModal.value; // Input hidden para el curso
 
-        if (!docente || !dia || !mes || !motivo || isNaN(cantidad) || cantidad <= 0 || !curso) {
-            alert('Completa todos los campos antes de registrar la falta.');
+        const numeroDias = obtenerNumeroDias(mes);
+        if (numeroDia > numeroDias) {
+            alert(`El mes seleccionado tiene solo ${numeroDias} días. Por favor, ingresa un número de día válido.`);
             return;
         }
 
-        // Registrar la ausencia sólo para el curso específico
-        registrarAusencia(docente, mes, dia, motivo, cantidad, curso);
+        if (!docente || !dia || isNaN(numeroDia) || numeroDia < 1 || numeroDia > numeroDias || !mes || !motivo || isNaN(cantidad) || cantidad <= 0 || !curso) {
+            alert('Completa todos los campos antes de registrar la falta y asegúrate de que el número del día sea válido.');
+            return;
+        }
+
+        // Registrar la ausencia con día y número del día
+        registrarAusencia(docente, mes, dia, numeroDia, motivo, cantidad, curso);
         motivoFaltaModal.hide();
-    });
-
-    // --------------------- Manejo del Formulario para Agregar Faltas desde Otro Modal ---------------------
-    const formAgregarFalta = document.getElementById('form-agregar-falta');
-    
-    // Crear selector de curso en el modal Agregar Falta
-    const selectorCursoFalta = document.createElement('select');
-    selectorCursoFalta.id = 'selectorCursoFalta';
-    selectorCursoFalta.classList.add('form-select', 'mb-3');
-    selectorCursoFalta.required = true;
-
-    const labelCurso = document.createElement('label');
-    labelCurso.setAttribute('for', 'selectorCursoFalta');
-    labelCurso.classList.add('form-label');
-    labelCurso.textContent = 'Curso';
-    formAgregarFalta.insertBefore(labelCurso, formAgregarFalta.children[0]);
-    formAgregarFalta.insertBefore(selectorCursoFalta, formAgregarFalta.children[1]);
-
-    const checkboxProfesorFalta = document.createElement('div');
-    checkboxProfesorFalta.id = 'checkboxProfesorFalta';
-    checkboxProfesorFalta.classList.add('row', 'mb-3');
-    formAgregarFalta.insertBefore(checkboxProfesorFalta, formAgregarFalta.children[3]);
-
-    const selectorMateriaFalta = document.getElementById('selectorMateriaFalta');
-    const selectorDiaFalta = document.getElementById('selectorDiaFalta');
-    const selectorMesFalta = document.getElementById('selectorMesFalta');
-    const selectorTipoFalta = document.getElementById('selectorTipoFalta');
-
-    // Poblar el selector de cursos para Agregar Falta
-    function poblarSelectorCursosFunc() {
-        selectorCursoFalta.innerHTML = '<option value="" disabled selected>Selecciona un curso</option>';
-        cursosDisponibles.forEach(curso => {
-            const option = document.createElement('option');
-            option.value = curso;
-            option.textContent = curso.toUpperCase();
-            selectorCursoFalta.appendChild(option);
-        });
-    }
-
-    // Al cambiar de curso, habilitar el selector de día y poblar checkbox de profesores
-    selectorCursoFalta.addEventListener('change', (e) => {
-        const cursoSeleccionado = e.target.value;
-        poblarCheckboxProfesoresFunc(cursoSeleccionado);
-        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectorMateriaFalta.disabled = true;
-    });
-
-    // Poblar checkbox de profesores basado en el curso seleccionado
-    function poblarCheckboxProfesoresFunc(curso) {
-        checkboxProfesorFalta.innerHTML = '';
-        if (!horarioPorCurso[curso]) {
-            console.error(`El curso "${curso}" no existe.`);
-            return;
-        }
-
-        const profesoresSet = new Set();
-        Object.values(horarioPorCurso[curso]).forEach(materiasCurso => {
-            materiasCurso.forEach(materiaObj => {
-                const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
-                profesoresSet.add(nombreProfesor);
-            });
-        });
-
-        const profesores = Array.from(profesoresSet).sort();
-
-        profesores.forEach(profesor => {
-            const colDiv = document.createElement('div');
-            colDiv.classList.add('col-md-4');
-
-            const checkboxDiv = document.createElement('div');
-            checkboxDiv.classList.add('form-check');
-
-            const checkbox = document.createElement('input');
-            checkbox.classList.add('form-check-input');
-            checkbox.type = 'checkbox';
-            checkbox.value = profesor;
-            checkbox.id = `profesor-${profesor}`;
-
-            const label = document.createElement('label');
-            label.classList.add('form-check-label');
-            label.htmlFor = `profesor-${profesor}`;
-            label.textContent = profesor;
-
-            checkboxDiv.appendChild(checkbox);
-            checkboxDiv.appendChild(label);
-            colDiv.appendChild(checkboxDiv);
-            checkboxProfesorFalta.appendChild(colDiv);
-        });
-    }
-
-    // Obtener profesores seleccionados
-    function obtenerProfesoresSeleccionadosFunc() {
-        const checkboxes = checkboxProfesorFalta.querySelectorAll('input[type="checkbox"]:checked');
-        return Array.from(checkboxes).map(cb => cb.value);
-    }
-
-    // Al cambiar checkbox de profesores, poblar selector de materias
-    checkboxProfesorFalta.addEventListener('change', () => {
-        const curso = selectorCursoFalta.value;
-        const profesoresSeleccionados = obtenerProfesoresSeleccionadosFunc();
-        poblarSelectorMateriasAgregarFaltaFunc(curso, profesoresSeleccionados);
-    });
-
-    // Poblar selector de materias basado en los profesores seleccionados
-    function poblarSelectorMateriasAgregarFaltaFunc(curso, profesoresSeleccionados) {
-        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectorMateriaFalta.disabled = false;
-
-        const materias = horarioPorCurso[curso][dia] || [];
-        const dia = selectorDiaFalta.value;
-
-        const materiasFiltradas = horarioPorCurso[curso][dia].filter(materiaObj => {
-            const nombreProfesor = materiaObj.profesor.split(' (')[0].trim();
-            return profesoresSeleccionados.includes(nombreProfesor);
-        });
-
-        materiasFiltradas.forEach(materiaObj => {
-            const option = document.createElement('option');
-            option.value = materiaObj.materia; 
-            option.textContent = materiaObj.materia;
-            selectorMateriaFalta.appendChild(option);
-        });
-
-        if (materiasFiltradas.length === 0) {
-            const option = document.createElement('option');
-            option.value = "";
-            option.textContent = "No hay materias para los profesores seleccionados";
-            selectorMateriaFalta.appendChild(option);
-            selectorMateriaFalta.disabled = true;
-        }
-    }
-
-    // Manejo del formulario para Agregar Falta desde otro modal
-    formAgregarFalta.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const curso = selectorCursoFalta.value;
-        const profesoresSeleccionados = obtenerProfesoresSeleccionadosFunc();
-        const materia = selectorMateriaFalta.value;
-        const dia = selectorDiaFalta.value;
-        const mes = selectorMesFalta.value;
-        const tipo = selectorTipoFalta.value;
-
-        if (!curso || profesoresSeleccionados.length === 0 || !materia || !dia || !mes || !tipo) {
-            alert('Por favor, completa todos los campos y selecciona al menos un profesor.');
-            return;
-        }
-
-        // Registrar la falta en el curso seleccionado
-        profesoresSeleccionados.forEach(profesor => {
-            registrarAusencia(profesor, mes, dia, tipo, 1, curso);
-        });
-
-        const agregarFaltaModal = bootstrap.Modal.getInstance(document.getElementById('agregarFaltaModal'));
-        if (agregarFaltaModal) {
-            agregarFaltaModal.hide();
-        }
-
-        formAgregarFalta.reset();
-        checkboxProfesorFalta.innerHTML = '';
-        selectorMateriaFalta.innerHTML = '<option value="" disabled selected>Selecciona una materia</option>';
-        selectorMateriaFalta.disabled = true;
     });
 });
 
