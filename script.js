@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             "VIERNES": [
                 { "materia": "GGF", "profesor": "Ferreyra Maria (P)" },
-                { "materia": "HTR", "profesor": "Esquiroz (P)" },
+                { "materia": "HTR", "profesor": "Esquiros (s)" },
                 { "materia": "IGS", "profesor": "Soleto Daniela (P)" }
             ]
         },
