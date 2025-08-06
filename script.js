@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Definir el horario
     const horarioPorCurso = {
+        // 1° grado
         "1° 1°": {
           LUNES: [
             { materia: "CNT", profesor: "Pasalacua (T)" },
@@ -42,144 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
           VIERNES: [
             { materia: "AMC", profesor: "Lirussi (S)" },
             { materia: "CSC", profesor: "Alvarez Daniel (T)" }
-          ]
-        },
-      
-        "2° 1°": {
-          LUNES: [
-            { materia: "PLG", profesor: "Ramirez Lurdes (S)" },
-            { materia: "FQA", profesor: "Iacobucci (T)" },
-            { materia: "CCD", profesor: "Daglio (T)" }
-          ],
-          MARTES: [
-            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
-            { materia: "AMC", profesor: "Artola (T)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
-          ],
-          MIERCOLES: [
-            { materia: "BLG", profesor: "Gerhardt (T)" },
-            { materia: "IGS", profesor: "Rivero Griselda (T)" }
-          ],
-          JUEVES: [
-            { materia: "MTM", profesor: "Motta Jorge (P)" },
-            { materia: "PLG", profesor: "Cardillo (S)" }
-          ],
-          VIERNES: [
-            { materia: "MTM", profesor: "Motta Jorge (P)" },
-            { materia: "GGF", profesor: "Almada Catalina (TI)" }
-          ]
-        },
-      
-        "3° 1°": {
-          LUNES: [
-            { materia: "FQA", profesor: "Iacobucci (T)" },
-            { materia: "BLG", profesor: "Gerhardt (T)" },
-            { materia: "CCD", profesor: "Capecce (P)" }
-          ],
-          MARTES: [
-            { materia: "AMC", profesor: "Pulsen Victor (S)" },
-            { materia: "GGF", profesor: "Echeverry (S)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
-          ],
-          MIERCOLES: [
-            { materia: "PLG", profesor: "Mendivil (T)/Cardillo (S)" },
-            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
-            { materia: "CCD", profesor: "Capecce" }
-          ],
-          JUEVES: [
-            { materia: "PLG", profesor: "Cardillo (S)" },
-            { materia: "MTM", profesor: "Coronel Emilia (P)" }
-          ],
-          VIERNES: [
-            { materia: "HTR", profesor: "Etcheverry (S)" },
-            { materia: "MTM", profesor: "Coronel Emilia (P)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
-          ]
-        },
-      
-        "4° 1°": {
-          LUNES: [
-            { materia: "SYA", profesor: "Miranda Ag (TI)" },
-            { materia: "LIT", profesor: "Cardillo (S)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
-          ],
-          MARTES: [
-            { materia: "NTI", profesor: "Crivaro (T)" },
-            { materia: "IAF", profesor: "Torrez Janco (P)" },
-            { materia: "GGF", profesor: "Ferreyra Maria" }
-          ],
-          MIERCOLES: [
-            { materia: "HTR", profesor: "Esquiros (S)" },
-            { materia: "PLG", profesor: "Cardillo (S)" },
-            { materia: "BLG", profesor: "Karlen Lucia (T)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
-          ],
-          JUEVES: [
-            { materia: "PSI", profesor: "Cateriano Claudia (T)" },
-            { materia: "MCS", profesor: "Motta Jorge (S)" },
-            { materia: "MCS", profesor: "Motta Jorge (S)" }
-          ],
-          VIERNES: [
-            { materia: "GGF", profesor: "Ferreyra Maria (P)" },
-            { materia: "HTR", profesor: "Esquiros (S)" },
-            { materia: "IGS", profesor: "Soleto Daniela (P)" }
-          ]
-        },
-      
-        "5° 2°": {
-          LUNES: [
-            { materia: "CCD", profesor: "Pacheco (T)" },
-            { materia: "GGF", profesor: "Gamboa" }
-          ],
-          MARTES: [
-            { materia: "LIT", profesor: "Perez Ramirez A (T)" },
-            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
-          ],
-          MIERCOLES: [
-            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
-            { materia: "PYC", profesor: "Armendano Benicio (T)" },
-            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
-          ],
-          JUEVES: [
-            { materia: "IAQ", profesor: "Pasalacua (TI)" },
-            { materia: "MCS", profesor: "Pereyra Manuel" }
-          ],
-          VIERNES: [
-            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
-            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
-            { materia: "EPO", profesor: "Gonzalez Antonia (T)" }
-          ]
-        },
-      
-        "6° 2ª": {
-          LUNES: [
-            { materia: "GGF", profesor: "Gamboa (T)" },
-            { materia: "FIA", profesor: "Calderon (P)" },
-            { materia: "FIA", profesor: "Calderon (P)" },
-            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
-          ],
-          MARTES: [
-            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
-            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
-            { materia: "IGS", profesor: "Rivas Marcela (T)" },
-            { materia: "RTE", profesor: "Daglio (P)" }
-          ],
-          MIERCOLES: [
-            { materia: "PIC", profesor: "Calderoni Ana" },
-            { materia: "MCS", profesor: "Motta Jorge (P)" },
-            { materia: "RTE", profesor: "Daglio (P)" }
-          ],
-          JUEVES: [
-            { materia: "TYC", profesor: "Lucero (T)" },
-            { materia: "HTR", profesor: "Lucero (T)" },
-            { materia: "IGS", profesor: "Rivas Marcela (T)" },
-            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
-          ],
-          VIERNES: [
-            { materia: "PIC", profesor: "Calderoni Ana" },
-            { materia: "MCS", profesor: "Jorge (P)" },
-            { materia: "MCS", profesor: "Jorge (P)" }
           ]
         },
       
@@ -233,6 +96,32 @@ document.addEventListener('DOMContentLoaded', () => {
           ]
         },
       
+        // 2° grado
+        "2° 1°": {
+          LUNES: [
+            { materia: "PLG", profesor: "Ramirez Lurdes (S)" },
+            { materia: "FQA", profesor: "Iacobucci (T)" },
+            { materia: "CCD", profesor: "Daglio (T)" }
+          ],
+          MARTES: [
+            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
+            { materia: "AMC", profesor: "Artola (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "BLG", profesor: "Gerhardt (T)" },
+            { materia: "IGS", profesor: "Rivero Griselda (T)" }
+          ],
+          JUEVES: [
+            { materia: "MTM", profesor: "Motta Jorge (P)" },
+            { materia: "PLG", profesor: "Cardillo (S)" }
+          ],
+          VIERNES: [
+            { materia: "MTM", profesor: "Motta Jorge (P)" },
+            { materia: "GGF", profesor: "Almada Catalina (TI)" }
+          ]
+        },
+      
         "2° 2°": {
           LUNES: [
             { materia: "HTR", profesor: "Peña M Jose (P)" },
@@ -258,6 +147,59 @@ document.addEventListener('DOMContentLoaded', () => {
             { materia: "PLG", profesor: "Roldan Camila (TI)" },
             { materia: "AMC", profesor: "Coccaro Luciano (T)" },
             { materia: "MTM", profesor: "Marquina Venero (P)" }
+          ]
+        },
+      
+        "2° 3°": {
+          LUNES: [
+            { materia: "PLG", profesor: "Barbosa (T)" },
+            { materia: "HTR", profesor: "Poblete Daniela (T)" },
+            { materia: "CCD", profesor: "Pacheco (T)" }
+          ],
+          MARTES: [
+            { materia: "GGF", profesor: "Suarez Ojeda Agustina (T)" },
+            { materia: "BLG", profesor: "Degue Viviana (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "FQA", profesor: "Solle G (T)/Pariachi (S)" },
+            { materia: "IGS", profesor: "Etchegaray Maria (P)/Sanchez Carolina" },
+            { materia: "EFC", profesor: "Zulberti Jorge (T)" }
+          ],
+          JUEVES: [
+            { materia: "MTM", profesor: "Marquina Venero (P)" },
+            { materia: "PGL", profesor: "Barbosa (T)" }
+          ],
+          VIERNES: [
+            { materia: "AMC", profesor: "Tambour Carlo (T)" },
+            { materia: "MTM", profesor: "Marquina Venero (P)" }
+          ]
+        },
+      
+        // 3° grado
+        "3° 1°": {
+          LUNES: [
+            { materia: "FQA", profesor: "Iacobucci (T)" },
+            { materia: "BLG", profesor: "Gerhardt (T)" },
+            { materia: "CCD", profesor: "Capecce (P)" }
+          ],
+          MARTES: [
+            { materia: "AMC", profesor: "Pulsen Victor (S)" },
+            { materia: "GGF", profesor: "Echeverry (S)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
+          ],
+          MIERCOLES: [
+            { materia: "PLG", profesor: "Mendivil (T)/Cardillo (S)" },
+            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
+            { materia: "CCD", profesor: "Capecce" }
+          ],
+          JUEVES: [
+            { materia: "PLG", profesor: "Cardillo (S)" },
+            { materia: "MTM", profesor: "Coronel Emilia (P)" }
+          ],
+          VIERNES: [
+            { materia: "HTR", profesor: "Etcheverry (S)" },
+            { materia: "MTM", profesor: "Coronel Emilia (P)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
           ]
         },
       
@@ -287,29 +229,61 @@ document.addEventListener('DOMContentLoaded', () => {
             { materia: "HTR", profesor: "Vaio Jorge (P)" }
           ]
         },
+        "3° 3°": {
+  LUNES: [
+    { materia: "PLG", profesor: "Casas Natalia (P)" },
+    { materia: "MTM", profesor: "Sobricio Natasha (P)" }
+  ],
+  MARTES: [
+    { materia: "MTM", profesor: "Sobricio Natasha (P)" },
+    { materia: "PLG", profesor: "Casas Natalia (P)" },
+    { materia: "EFC", profesor: "Gonzalez David (P)" }
+  ],
+  MIERCOLES: [
+    { materia: "HTR", profesor: "Santillan Andrea (P)" },
+    { materia: "IGS", profesor: "Yamuni Magali (P)" },
+      ],
+  JUEVES: [
+    { materia: "GGF", profesor: "Almada Catalina (P)" },
+    { materia: "FQA", profesor: "Rapretti Estefania Cecilia (P)" },
+    { materia: "CCD", profesor: "Inchaupe Maria de Los Angeles (P)" },
+    { materia: "CCD", profesor: "Inchaupe Maria de Los Angeles (P)" }
+
+  ],
+  VIERNES: [
+    { materia: "APV", profesor: "Di Lucca Maria Belen (P)" },
+    { materia: "BLG", profesor: "Karlen Lucia (P)" },
+    { materia: "EFC", profesor: "Gonzalez David (P)" }
+  ]
+},
       
-        "2° 3°": {
+        // 4° grado
+        "4° 1°": {
           LUNES: [
-            { materia: "PLG", profesor: "Barbosa (T)" },
-            { materia: "HTR", profesor: "Poblete Daniela (T)" },
-            { materia: "CCD", profesor: "Pacheco (T)" }
+            { materia: "SYA", profesor: "Miranda Ag (TI)" },
+            { materia: "LIT", profesor: "Cardillo (S)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
           ],
           MARTES: [
-            { materia: "GGF", profesor: "Suarez Ojeda Agustina (T)" },
-            { materia: "BLG", profesor: "Degue Viviana (P)" }
+            { materia: "NTI", profesor: "Crivaro (T)" },
+            { materia: "IAF", profesor: "Torrez Janco (P)" },
+            { materia: "GGF", profesor: "Ferreyra Maria" }
           ],
           MIERCOLES: [
-            { materia: "FQA", profesor: "Solle G (T)/Pariachi (S)" },
-            { materia: "IGS", profesor: "Etchegaray Maria (P)/Sanchez Carolina" },
-            { materia: "EFC", profesor: "Zulberti Jorge (T)" }
+            { materia: "HTR", profesor: "Esquiros (S)" },
+            { materia: "PLG", profesor: "Cardillo (S)" },
+            { materia: "BLG", profesor: "Karlen Lucia (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
           ],
           JUEVES: [
-            { materia: "MTM", profesor: "Marquina Venero (P)" },
-            { materia: "PGL", profesor: "Barbosa (T)" }
+            { materia: "PSI", profesor: "Cateriano Claudia (T)" },
+            { materia: "MCS", profesor: "Motta Jorge (S)" },
+            { materia: "MCS", profesor: "Motta Jorge (S)" }
           ],
           VIERNES: [
-            { materia: "AMC", profesor: "Tambour Carlo (T)" },
-            { materia: "MTM", profesor: "Marquina Venero (P)" }
+            { materia: "GGF", profesor: "Ferreyra Maria (P)" },
+            { materia: "HTR", profesor: "Esquiros (S)" },
+            { materia: "IGS", profesor: "Soleto Daniela (P)" }
           ]
         },
       
@@ -338,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ]
         },
       
+        // 5° grado
         "5° 1°": {
           LUNES: [
             { materia: "CCS", profesor: "Pacheco Daniela (T)" },
@@ -364,6 +339,33 @@ document.addEventListener('DOMContentLoaded', () => {
           ]
         },
       
+        "5° 2°": {
+          LUNES: [
+            { materia: "CCD", profesor: "Pacheco (T)" },
+            { materia: "GGF", profesor: "Gamboa" }
+          ],
+          MARTES: [
+            { materia: "LIT", profesor: "Perez Ramirez A (T)" },
+            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
+            { materia: "PYC", profesor: "Armendano Benicio (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          JUEVES: [
+            { materia: "IAQ", profesor: "Pasalacua (TI)" },
+            { materia: "MCS", profesor: "Pereyra Manuel" }
+          ],
+          VIERNES: [
+            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
+            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
+            { materia: "EPO", profesor: "Gonzalez Antonia (T)" }
+          ]
+        },
+      
+        // 6° grado
         "6° 1°": {
           LUNES: [
             { materia: "FIA", profesor: "Diaz Odina (T)/Bastias Francisco (S)" },
@@ -389,8 +391,40 @@ document.addEventListener('DOMContentLoaded', () => {
             { materia: "EFC", profesor: "Alvares Andrea (T)/Alvarez Fer (S)" },
             { materia: "MCS", profesor: "Gomez Natalia (T)/Motta Jorge (S)" }
           ]
+        },
+      
+        "6° 2ª": {
+          LUNES: [
+            { materia: "GGF", profesor: "Gamboa (T)" },
+            { materia: "FIA", profesor: "Calderon (P)" },
+            { materia: "FIA", profesor: "Calderon (P)" },
+            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
+          ],  
+          MARTES: [
+            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
+            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
+            { materia: "IGS", profesor: "Rivas Marcela (T)" },
+            { materia: "RTE", profesor: "Daglio (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "PIC", profesor: "Calderoni Ana" },
+            { materia: "MCS", profesor: "Motta Jorge (P)" },
+            { materia: "RTE", profesor: "Daglio (P)" }
+          ],
+          JUEVES: [
+            { materia: "TYC", profesor: "Lucero (T)" },
+            { materia: "HTR", profesor: "Lucero (T)" },
+            { materia: "IGS", profesor: "Rivas Marcela (T)" },
+            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
+          ],
+          VIERNES: [
+            { materia: "PIC", profesor: "Calderoni Ana" },
+            { materia: "MCS", profesor: "Jorge (P)" },
+            { materia: "MCS", profesor: "Jorge (P)" }
+          ]
         }
       };
+      
       
  
 
