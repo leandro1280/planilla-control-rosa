@@ -20,356 +20,379 @@ document.addEventListener('DOMContentLoaded', () => {
     // Definir el horario
     const horarioPorCurso = {
         "1° 1°": {
-            "LUNES": [
-                { "materia": "CNT", "profesor": "Pasalacua (T)" },
-                { "materia": "PLG", "profesor": "Barbosa (T)" },
-                { "materia": "EF", "profesor": "Miguel Pablo (S)" }, 
-                { "materia": "CCD", "profesor": "Daglio (T)" }
-            ],
-            "MARTES": [
-                { "materia": "CSC", "profesor": "Alvarez Daniel (T)" },
-                { "materia": "MTM", "profesor": "Crivaro (T)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "CNT", "profesor": "Pasalacua (T)" },
-                { "materia": "MTM", "profesor": "Crivaro (T)" },
-                { "materia": "EFC", "profesor": "Miguel Pablo (S)" }
-            ],
-            "JUEVES": [
-                { "materia": "IGS", "profesor": "Cernada (P)" },
-                { "materia": "PLG", "profesor": "Barbosa (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "AMC", "profesor": "Lirussi (S)" },
-                { "materia": "CSC", "profesor": "Alvarez Daniel (T)" }
-            ]
+          LUNES: [
+            { materia: "CNT", profesor: "Pasalacua (T)" },
+            { materia: "PLG", profesor: "Barbosa (T)" },
+            { materia: "EF",  profesor: "Miguel Pablo (S)" },
+            { materia: "CCD", profesor: "Daglio (T)" }
+          ],
+          MARTES: [
+            { materia: "CSC", profesor: "Alvarez Daniel (T)" },
+            { materia: "MTM", profesor: "Crivaro (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "CNT", profesor: "Pasalacua (T)" },
+            { materia: "MTM", profesor: "Crivaro (T)" },
+            { materia: "EFC", profesor: "Miguel Pablo (S)" }
+          ],
+          JUEVES: [
+            { materia: "IGS", profesor: "Cernada (P)" },
+            { materia: "PLG", profesor: "Barbosa (T)" }
+          ],
+          VIERNES: [
+            { materia: "AMC", profesor: "Lirussi (S)" },
+            { materia: "CSC", profesor: "Alvarez Daniel (T)" }
+          ]
         },
+      
         "2° 1°": {
-            "LUNES": [
-                { "materia": "PLG", "profesor": "Ramirez Lurdes (S)" },
-                { "materia": "FQA", "profesor": "Iacobucci (T)" },
-                { "materia": "CCD", "profesor": "Daglio (T)" }
-            ],
-            "MARTES": [
-                { "materia": "HTR", "profesor": "Lucero Gianetti (T)" }, 
-                { "materia": "AMC", "profesor": "Artola (T)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "BLG", "profesor": "Gerhardt (T)" },
-                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "MTM", "profesor": "Motta Jorge (P)" }, 
-                { "materia": "PLG", "profesor": "Cardillo (S)" }
-            ],
-            "VIERNES": [
-                { "materia": "MTM", "profesor": "Motta Jorge (P)" },
-                { "materia": "GGF", "profesor": "Almada Catalina (TI)" } 
-            ]
+          LUNES: [
+            { materia: "PLG", profesor: "Ramirez Lurdes (S)" },
+            { materia: "FQA", profesor: "Iacobucci (T)" },
+            { materia: "CCD", profesor: "Daglio (T)" }
+          ],
+          MARTES: [
+            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
+            { materia: "AMC", profesor: "Artola (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "BLG", profesor: "Gerhardt (T)" },
+            { materia: "IGS", profesor: "Rivero Griselda (T)" }
+          ],
+          JUEVES: [
+            { materia: "MTM", profesor: "Motta Jorge (P)" },
+            { materia: "PLG", profesor: "Cardillo (S)" }
+          ],
+          VIERNES: [
+            { materia: "MTM", profesor: "Motta Jorge (P)" },
+            { materia: "GGF", profesor: "Almada Catalina (TI)" }
+          ]
         },
+      
         "3° 1°": {
-            "LUNES": [
-                { "materia": "FQA", "profesor": "Iacobucci (T)" },
-                { "materia": "BLG", "profesor": "Gerhardt (T)" },
-                { "materia": "CCD", "profesor": "Capecce (P)" }
-            ],
-            "MARTES": [
-                { "materia": "AMC", "profesor": "Pulsen Victor(S)" },
-                { "materia": "GGF", "profesor": "Echeverry (S)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "PLG", "profesor": "Mendivil (T)/Cardillo (S)" },
-                { "materia": "IGS", "profesor": "Sanchez Carolina (P)" },
-                { "materia": "CCD", "profesor": "Capecce" }
-            ],
-            "JUEVES": [
-                { "materia": "PLG", "profesor": "Cardillo (S)" },
-                { "materia": "MTM", "profesor": "Coronel Emilia (P)" }
-            ],
-            "VIERNES": [
-                { "materia": "HTR", "profesor": "Etcheverry (S)" },
-                { "materia": "MTM", "profesor": "Coronel Emilia (P)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (S)" }
-            ]
+          LUNES: [
+            { materia: "FQA", profesor: "Iacobucci (T)" },
+            { materia: "BLG", profesor: "Gerhardt (T)" },
+            { materia: "CCD", profesor: "Capecce (P)" }
+          ],
+          MARTES: [
+            { materia: "AMC", profesor: "Pulsen Victor (S)" },
+            { materia: "GGF", profesor: "Echeverry (S)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
+          ],
+          MIERCOLES: [
+            { materia: "PLG", profesor: "Mendivil (T)/Cardillo (S)" },
+            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
+            { materia: "CCD", profesor: "Capecce" }
+          ],
+          JUEVES: [
+            { materia: "PLG", profesor: "Cardillo (S)" },
+            { materia: "MTM", profesor: "Coronel Emilia (P)" }
+          ],
+          VIERNES: [
+            { materia: "HTR", profesor: "Etcheverry (S)" },
+            { materia: "MTM", profesor: "Coronel Emilia (P)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (S)" }
+          ]
         },
+      
         "4° 1°": {
-            "LUNES": [
-                { "materia": "SYA", "profesor": "Miranda Ag (TI)" },
-                { "materia": "LIT", "profesor": "Cardillo (S)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "MARTES": [
-                { "materia": "NTI", "profesor": "Crivaro (T)" },
-                { "materia": "IAF", "profesor": "Torrez Janco (P)" },
-                { "materia": "GGF", "profesor": "Ferreyra Maria" } 
-            ],
-            "MIERCOLES": [
-                { "materia": "HTR", "profesor": "Esquiros (S)" },
-                { "materia": "PLG", "profesor": "Cardillo (S)" },
-                { "materia": "BLG", "profesor": "Karlen Lucia (T)" }, 
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "PSI", "profesor": "Cateriano Claudia (T)" },
-                { "materia": "MCS", "profesor": "Motta Jorge (S)" },
-                { "materia": "MCS", "profesor": "Motta Jorge (S)" }
-            ],
-            "VIERNES": [
-                { "materia": "GGF", "profesor": "Ferreyra Maria (P)" },
-                { "materia": "HTR", "profesor": "Esquiros (s)" },
-                { "materia": "IGS", "profesor": "Soleto Daniela (P)" }
-            ]
+          LUNES: [
+            { materia: "SYA", profesor: "Miranda Ag (TI)" },
+            { materia: "LIT", profesor: "Cardillo (S)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MARTES: [
+            { materia: "NTI", profesor: "Crivaro (T)" },
+            { materia: "IAF", profesor: "Torrez Janco (P)" },
+            { materia: "GGF", profesor: "Ferreyra Maria" }
+          ],
+          MIERCOLES: [
+            { materia: "HTR", profesor: "Esquiros (S)" },
+            { materia: "PLG", profesor: "Cardillo (S)" },
+            { materia: "BLG", profesor: "Karlen Lucia (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          JUEVES: [
+            { materia: "PSI", profesor: "Cateriano Claudia (T)" },
+            { materia: "MCS", profesor: "Motta Jorge (S)" },
+            { materia: "MCS", profesor: "Motta Jorge (S)" }
+          ],
+          VIERNES: [
+            { materia: "GGF", profesor: "Ferreyra Maria (P)" },
+            { materia: "HTR", profesor: "Esquiros (S)" },
+            { materia: "IGS", profesor: "Soleto Daniela (P)" }
+          ]
         },
+      
         "5° 2°": {
-            "LUNES": [
-                { "materia": "CCD", "profesor": "Pacheco (T)" },
-                { "materia": "GGF", "profesor": "Gamboa" }
-            ],
-            "MARTES": [
-                { "materia": "LIT", "profesor": "Perez Ramirez A (T)" },
-                { "materia": "HTR", "profesor": "Lucero Gianetti (T)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "IGS", "profesor": "Sanchez Carolina (P)" }, 
-                { "materia": "PYC", "profesor": "Armendano Benicio (T)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "IAQ", "profesor": "Pasalacua (TI)" }, 
-                { "materia": "MCS", "profesor": "Pereyra Manuel" }
-            ],
-            "VIERNES": [
-                { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
-                { "materia": "SOC", "profesor": "Ferrero Verzulli M (T)" },
-                { "materia": "EPO", "profesor": "Gonzalez Antonia (T)" }
-            ]
+          LUNES: [
+            { materia: "CCD", profesor: "Pacheco (T)" },
+            { materia: "GGF", profesor: "Gamboa" }
+          ],
+          MARTES: [
+            { materia: "LIT", profesor: "Perez Ramirez A (T)" },
+            { materia: "HTR", profesor: "Lucero Gianetti (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "IGS", profesor: "Sanchez Carolina (P)" },
+            { materia: "PYC", profesor: "Armendano Benicio (T)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          JUEVES: [
+            { materia: "IAQ", profesor: "Pasalacua (TI)" },
+            { materia: "MCS", profesor: "Pereyra Manuel" }
+          ],
+          VIERNES: [
+            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
+            { materia: "SOC", profesor: "Ferrero Verzulli M (T)" },
+            { materia: "EPO", profesor: "Gonzalez Antonia (T)" }
+          ]
         },
-        "6° 2°": {
-            "LUNES": [
-                { "materia": "HTR", "profesor": "Vaio Jorge" }, 
-                { "materia": "FIA", "profesor": "SEQUI Emilio" },
-                { "materia": "EFC", "profesor": "DUMONTET Gaston" }
-            ],
-            "MARTES": [
-                { "materia": "LIT", "profesor": "CARDILLO Paula" },
-                { "materia": "RTE", "profesor": "DELLAGIOVANNA Paola" }
-            ],
-            "MIERCOLES": [
-                { "materia": "TYC", "profesor": "Vaio Jorge" },
-                { "materia": "MCS", "profesor": "Motta Jorge" },
-                { "materia": "GGF", "profesor": "Ferreyra Maria" }
-            ],
-            "JUEVES": [
-                { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
-                { "materia": "PIC", "profesor": "MORAU Nestor" }
-            ],
-            "VIERNES": [
-                { "materia": "PIC", "profesor": "MORAU Nestor" },
-                { "materia": "MCS", "profesor": "Motta Jorge" }
-            ]
+      
+        "6° 2ª": {
+          LUNES: [
+            { materia: "GGF", profesor: "Gamboa (T)" },
+            { materia: "FIA", profesor: "Calderon (P)" },
+            { materia: "FIA", profesor: "Calderon (P)" },
+            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
+          ],
+          MARTES: [
+            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
+            { materia: "LIT", profesor: "Gennari Marcos (TI)" },
+            { materia: "IGS", profesor: "Rivas Marcela (T)" },
+            { materia: "RTE", profesor: "Daglio (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "PIC", profesor: "Calderoni Ana" },
+            { materia: "MCS", profesor: "Motta Jorge (P)" },
+            { materia: "RTE", profesor: "Daglio (P)" }
+          ],
+          JUEVES: [
+            { materia: "TYC", profesor: "Lucero (T)" },
+            { materia: "HTR", profesor: "Lucero (T)" },
+            { materia: "IGS", profesor: "Rivas Marcela (T)" },
+            { materia: "EFC", profesor: "Dumontet Gaston (P)" }
+          ],
+          VIERNES: [
+            { materia: "PIC", profesor: "Calderoni Ana" },
+            { materia: "MCS", profesor: "Jorge (P)" },
+            { materia: "MCS", profesor: "Jorge (P)" }
+          ]
         },
+      
         "1° 2°": {
-            "LUNES": [
-                { "materia": "PLG", "profesor": "Barbosa (S)" },
-                { "materia": "CNT", "profesor": "Leon Jimena (P)" },
-                { "materia": "EFC", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "MARTES": [
-                { "materia": "CSC", "profesor": "Peña M Jose (T)" },
-                { "materia": "PLG", "profesor": "Barbosa (P)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "AMC", "profesor": "Garcia Lila (T)" },
-                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "CNT", "profesor": "Leon Jimena (P)" },
-                { "materia": "MTM", "profesor": "LOPEZ Karina (TI)" },
-                { "materia": "CCD", "profesor": "Olivera Patricia (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "CSC", "profesor": "Peña M Jose (T)" },
-                { "materia": "", "profesor": "Torrez Janco (P)" } 
-            ]
+          LUNES: [
+            { materia: "PLG", profesor: "Barbosa (S)" },
+            { materia: "CNT", profesor: "Leon Jimena (P)" },
+            { materia: "EFC", profesor: "Alvarez Fernando (T)" }
+          ],
+          MARTES: [
+            { materia: "CSC", profesor: "Peña M Jose (T)" },
+            { materia: "PLG", profesor: "Barbosa (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "AMC", profesor: "Garcia Lila (T)" },
+            { materia: "IGS", profesor: "Rivero Griselda (T)" }
+          ],
+          JUEVES: [
+            { materia: "CNT", profesor: "Leon Jimena (P)" },
+            { materia: "MTM", profesor: "Lopez Karina (TI)" },
+            { materia: "CCD", profesor: "Olivera Patricia (T)" }
+          ],
+          VIERNES: [
+            { materia: "CSC", profesor: "Peña M Jose (T)" },
+            { materia: "",    profesor: "Torrez Janco (P)" }
+          ]
         },
+      
         "1° 3°": {
-            "LUNES": [
-                { "materia": "CSC", "profesor": "Vaio Jorge (T)" },
-                { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
-                { "materia": "CCD", "profesor": "Pacheco (T)" }
-            ],
-            "MARTES": [
-                { "materia": "AMC", "profesor": "Silva Florencia (T)" },
-                { "materia": "CSC", "profesor": "Vaio Jorge (T)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "CNT", "profesor": "Da Silva Segovia (TI)" },
-                { "materia": "IGS", "profesor": "Rivero Griselda (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "MTM", "profesor": "LOPEZ Karina " },
-                { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" },
-                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "MTM", "profesor": "LOPEZ karina " },
-                { "materia": "PLG", "profesor": "Roldan Camila (TI)/BONETTI" }
-            ]
+          LUNES: [
+            { materia: "CSC", profesor: "Vaio Jorge (T)" },
+            { materia: "CNT", profesor: "Da Silva Segovia (TI)" },
+            { materia: "CCD", profesor: "Pacheco (T)" }
+          ],
+          MARTES: [
+            { materia: "AMC", profesor: "Silva Florencia (T)" },
+            { materia: "CSC", profesor: "Vaio Jorge (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "CNT", profesor: "Da Silva Segovia (TI)" },
+            { materia: "IGS", profesor: "Rivero Griselda (T)" }
+          ],
+          JUEVES: [
+            { materia: "MTM", profesor: "Lopez Karina (T)" },
+            { materia: "PLG", profesor: "Roldan Camila (TI)/Bonetti" },
+            { materia: "EFC", profesor: "Zulberti Jorge (T)" }
+          ],
+          VIERNES: [
+            { materia: "MTM", profesor: "Lopez Karina (T)" },
+            { materia: "PLG", profesor: "Roldan Camila (TI)/Bonetti" }
+          ]
         },
+      
         "2° 2°": {
-            "LUNES": [
-                { "materia": "HTR", "profesor": "Peña M Jose (P)" },
-                { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }, 
-                { "materia": "CCD", "profesor": "Daglio (T)" },
-                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-            ],
-            "MARTES": [
-                { "materia": "GGF", "profesor": "Ferreyra Maria (P)" }, 
-                { "materia": "MTM", "profesor": "Caracoche Eliana (P)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "FQA", "profesor": "Iacobucci (T)" },
-                { "materia": "IGS", "profesor": "Yamuni M (P)" },
-                { "materia": "CCD", "profesor": "Daglio (T)" },
-                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-            ],
-            "JUEVES": [
-                { "materia": "PLG", "profesor": "Roldan Camila (T)/CASAS" },
-                { "materia": "BLG", "profesor": "Degue Viviana (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "PLG", "profesor": "Roldan Camila (TI)" },
-                { "materia": "AMC", "profesor": "Coccaro Luciano (T)" },
-                { "materia": "MTM", "profesor": "Marquina Venero (P)" }
-            ]
+          LUNES: [
+            { materia: "HTR", profesor: "Peña M Jose (P)" },
+            { materia: "MTM", profesor: "Caracoche Eliana (P)" },
+            { materia: "CCD", profesor: "Daglio (T)" },
+            { materia: "EFC", profesor: "Cao (T)/Miguel Pablo (S)" }
+          ],
+          MARTES: [
+            { materia: "GGF", profesor: "Ferreyra Maria (P)" },
+            { materia: "MTM", profesor: "Caracoche Eliana (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "FQA", profesor: "Iacobucci (T)" },
+            { materia: "IGS", profesor: "Yamuni M (P)" },
+            { materia: "CCD", profesor: "Daglio (T)" },
+            { materia: "EFC", profesor: "Cao (T)/Miguel Pablo (S)" }
+          ],
+          JUEVES: [
+            { materia: "PLG", profesor: "Roldan Camila (T)/Casas" },
+            { materia: "BLG", profesor: "Degue Viviana (T)" }
+          ],
+          VIERNES: [
+            { materia: "PLG", profesor: "Roldan Camila (TI)" },
+            { materia: "AMC", profesor: "Coccaro Luciano (T)" },
+            { materia: "MTM", profesor: "Marquina Venero (P)" }
+          ]
         },
+      
         "3° 2°": {
-            "LUNES": [
-                { "materia": "MTM", "profesor": "Pariachi W (P)" },
-                { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
-                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-            ],
-            "MARTES": [
-                { "materia": "PGL", "profesor": "Roldan Camila (TI)" },
-                { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" }, 
-                { "materia": "CCD", "profesor": "Alvarez Fernando (T)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "MTM", "profesor": "Pariachi W (P)" },
-                { "materia": "IGS", "profesor": "Aceto Analia (P)" },
-                { "materia": "CCD", "profesor": "Alvarez Fernando (T)" },
-                { "materia": "EFC", "profesor": "Cao (T)/Miguel Pablo (S)" }
-            ],
-            "JUEVES": [
-                { "materia": "BLG", "profesor": "Valentini E. (T)" },
-                { "materia": "FQA", "profesor": "Iacobucci (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "AMC", "profesor": "Aberasturi Javier (T)" },
-                { "materia": "HTR", "profesor": "Vaio Jorge (P)" }
-            ]
+          LUNES: [
+            { materia: "MTM", profesor: "Pariachi W (P)" },
+            { materia: "PGL", profesor: "Roldan Camila (TI)" },
+            { materia: "EFC", profesor: "Cao (T)/Miguel Pablo (S)" }
+          ],
+          MARTES: [
+            { materia: "PGL", profesor: "Roldan Camila (TI)" },
+            { materia: "GGF", profesor: "Suarez Ojeda Agustina (T)" },
+            { materia: "CCD", profesor: "Alvarez Fernando (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "MTM", profesor: "Pariachi W (P)" },
+            { materia: "IGS", profesor: "Aceto Analia (P)" },
+            { materia: "CCD", profesor: "Alvarez Fernando (T)" },
+            { materia: "EFC", profesor: "Cao (T)/Miguel Pablo (S)" }
+          ],
+          JUEVES: [
+            { materia: "BLG", profesor: "Valentini E. (T)" },
+            { materia: "FQA", profesor: "Iacobucci (T)" }
+          ],
+          VIERNES: [
+            { materia: "AMC", profesor: "Aberasturi Javier (T)" },
+            { materia: "HTR", profesor: "Vaio Jorge (P)" }
+          ]
         },
+      
         "2° 3°": {
-            "LUNES": [
-                { "materia": "PLG", "profesor": "Barbosa (T)" },
-                { "materia": "HTR", "profesor": "Poblete Daniela (T)" },
-                { "materia": "CCD", "profesor": "Pacheco (T)" }
-            ],
-            "MARTES": [
-                { "materia": "GGF", "profesor": "Suarez Ojeda Agustina (T)" },
-                { "materia": "BLG", "profesor": "Degue Viviana (P)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "FQA", "profesor": "Solle G (T)/Pariachi (S)" },
-                { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }, 
-                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "MTM", "profesor": "Marquina Venero (P)" },
-                { "materia": "PGL", "profesor": "Barbosa (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "AMC", "profesor": "Tambour Carlo (T)" },
-                { "materia": "MTM", "profesor": "Marquina Venero (P)" }
-            ]
+          LUNES: [
+            { materia: "PLG", profesor: "Barbosa (T)" },
+            { materia: "HTR", profesor: "Poblete Daniela (T)" },
+            { materia: "CCD", profesor: "Pacheco (T)" }
+          ],
+          MARTES: [
+            { materia: "GGF", profesor: "Suarez Ojeda Agustina (T)" },
+            { materia: "BLG", profesor: "Degue Viviana (P)" }
+          ],
+          MIERCOLES: [
+            { materia: "FQA", profesor: "Solle G (T)/Pariachi (S)" },
+            { materia: "IGS", profesor: "Etchegaray Maria (P)/Sanchez Carolina" },
+            { materia: "EFC", profesor: "Zulberti Jorge (T)" }
+          ],
+          JUEVES: [
+            { materia: "MTM", profesor: "Marquina Venero (P)" },
+            { materia: "PGL", profesor: "Barbosa (T)" }
+          ],
+          VIERNES: [
+            { materia: "AMC", profesor: "Tambour Carlo (T)" },
+            { materia: "MTM", profesor: "Marquina Venero (P)" }
+          ]
         },
+      
         "4° 2°": {
-            "LUNES": [
-                { "materia": "SYA", "profesor": "Videla Estela (T)" },
-                { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
-                { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
-            ],
-            "MARTES": [
-                { "materia": "BLG", "profesor": "Karlen Lucia (T)" },
-                { "materia": "IGS", "profesor": "Etchegaray Maria (P)/Sanchez Carolina" }
-            ],
-            "MIERCOLES": [
-                { "materia": "PSI", "profesor": "Fajre M E (T)" },
-                { "materia": "LIT", "profesor": "Barbosa (T)" },
-                { "materia": "EFC", "profesor": "Miguel Pablo (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "IAF", "profesor": "Iacobucci (T)" },
-                { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
-            ],
-            "VIERNES": [
-                { "materia": "NTI", "profesor": "Molina M (T)" },
-                { "materia": "MTM", "profesor": "Tiziano M (TI)" }
-            ]
+          LUNES: [
+            { materia: "SYA", profesor: "Videla Estela (T)" },
+            { materia: "HTR", profesor: "Cotovich Leonardo (TI)" },
+            { materia: "EFC", profesor: "Miguel Pablo (T)" }
+          ],
+          MARTES: [
+            { materia: "BLG", profesor: "Karlen Lucia (T)" },
+            { materia: "IGS", profesor: "Etchegaray Maria (P)/Sanchez Carolina" }
+          ],
+          MIERCOLES: [
+            { materia: "PSI", profesor: "Fajre M E (T)" },
+            { materia: "LIT", profesor: "Barbosa (T)" },
+            { materia: "EFC", profesor: "Miguel Pablo (T)" }
+          ],
+          JUEVES: [
+            { materia: "IAF", profesor: "Iacobucci (T)" },
+            { materia: "GGF", profesor: "Almada Catalina (TI)" }
+          ],
+          VIERNES: [
+            { materia: "NTI", profesor: "Molina M (T)" },
+            { materia: "MTM", profesor: "Tiziano M (TI)" }
+          ]
         },
+      
         "5° 1°": {
-            "LUNES": [
-                { "materia": "CCD", "profesor": "Pacheco (T)" },
-                { "materia": "SOC", "profesor": "Orsi Pablo" }
-            ],
-            "MARTES": [
-                { "materia": "EPO", "profesor": "Bianco Walter (T)" },
-                { "materia": "IGS", "profesor": "Etchegaray Maria (P)" } 
-            ],
-            "MIERCOLES": [
-                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Sommariva (S)" },
-                { "materia": "HTR", "profesor": "Cotovich Leonardo (TI)" },
-                { "materia": "EFC", "profesor": "Zulberti Jorge (T)" }
-            ],
-            "JUEVES": [
-                { "materia": "LIT", "profesor": "Barbosa (T)" },
-                { "materia": "IAQ", "profesor": "Gimenez Juana (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "PYC", "profesor": "Mendez Mariano (T)" },
-                { "materia": "GGF", "profesor": "Almada Catalina (TI)" }
-            ]
+          LUNES: [
+            { materia: "CCS", profesor: "Pacheco Daniela (T)" },
+            { materia: "SOC", profesor: "Pereyra Isabel (P)" },
+            { materia: "SOC", profesor: "Pereyra Isabel (P)" }
+          ],
+          MARTES: [
+            { materia: "EPO", profesor: "Bianco Walter (T)" },
+            { materia: "HTR", profesor: "Alvarez Daniel (T)" },
+            { materia: "HTR", profesor: "Alvarez Daniel (T)" }
+          ],
+          MIERCOLES: [
+            { materia: "MCS", profesor: "Gomez Natalia (T)/Somariba (S)" },
+            { materia: "MCS", profesor: "Gomez Natalia (T)/Somariba (S)" },
+            { materia: "IGS", profesor: "Yzacnik Alejandra (T)" }
+          ],
+          JUEVES: [
+            { materia: "LIT", profesor: "Castro Cecilia (T)/Barbosa (S)" },
+            { materia: "IAQ", profesor: "Gimenez Juana (T)" }
+          ],
+          VIERNES: [
+            { materia: "PYC", profesor: "Mendez Maria (T)" },
+            { materia: "GGF", profesor: "Almada Catalina (T)" }
+          ]
         },
+      
         "6° 1°": {
-            "LUNES": [
-                { "materia": "FIA", "profesor": "Diaz Odina (T)/Bastias Francisco (S)" },
-                { "materia": "RTE", "profesor": "Morette Maria (T)" },
-                { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" }
-            ],
-            "MARTES": [
-                { "materia": "IGS", "profesor": "Rivas Marcela (TI)" },
-                { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
-                { "materia": "MCM", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-            ],
-            "MIERCOLES": [
-                { "materia": "TYC", "profesor": "Payares Gaston (T)" },
-                { "materia": "HTR", "profesor": "Baldi N (T)/Cardenas (S)" },
-                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-            ],
-            "JUEVES": [
-                { "materia": "GGF", "profesor": "Perez Norma (P)" },
-                { "materia": "LIT", "profesor": "BARBOSA (T)" }
-            ],
-            "VIERNES": [
-                { "materia": "PIC", "profesor": "Villar Lidia (T)" },
-                { "materia": "EFC", "profesor": "Alvares Andrea (T)/Alvarez Fer (S)" },
-                { "materia": "MCS", "profesor": "Gomez Natalia (T)/Motta Jorge (S)" }
-            ]
+          LUNES: [
+            { materia: "FIA", profesor: "Diaz Odina (T)/Bastias Francisco (S)" },
+            { materia: "RTE", profesor: "Morette Maria (T)" },
+            { materia: "EFC", profesor: "Alvares Andrea (T)/Alvarez Fer (S)" }
+          ],
+          MARTES: [
+            { materia: "IGS", profesor: "Rivas Marcela (TI)" },
+            { materia: "HTR", profesor: "Baldi N (T)/Cardenas (S)" },
+            { materia: "MCM", profesor: "Gomez Natalia (T)/Motta Jorge (S)" }
+          ],
+          MIERCOLES: [
+            { materia: "TYC", profesor: "Payares Gaston (T)" },
+            { materia: "HTR", profesor: "Baldi N (T)/Cardenas (S)" },
+            { materia: "MCS", profesor: "Gomez Natalia (T)/Motta Jorge (S)" }
+          ],
+          JUEVES: [
+            { materia: "GGF", profesor: "Perez Norma (P)" },
+            { materia: "LIT", profesor: "Barbosa (T)" }
+          ],
+          VIERNES: [
+            { materia: "PIC", profesor: "Villar Lidia (T)" },
+            { materia: "EFC", profesor: "Alvares Andrea (T)/Alvarez Fer (S)" },
+            { materia: "MCS", profesor: "Gomez Natalia (T)/Motta Jorge (S)" }
+          ]
         }
-    };
+      };
+      
+ 
 
     // Suplentes por materia (opcional, si no tienes, déjalo vacío)
     const suplentesPorMateria = {
