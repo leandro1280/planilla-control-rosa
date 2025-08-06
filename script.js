@@ -74,20 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
         "1° 3°": {
           LUNES: [
             { materia: "CSC", profesor: "Vaio Jorge (T)" },
-            { materia: "CNT", profesor: "Da Silva Segovia (TI)" },
-            { materia: "CCD", profesor: "Pacheco (T)" }
+            { materia: "CNT", profesor: "Olguin Carla(T)" },
+    
           ],
           MARTES: [
-            { materia: "AMC", profesor: "Silva Florencia (T)" },
+            { materia: "ART", profesor: "Silva Florencia (T)" },
+            { materia: "CNT", profesor: "Olguin Carla(T)" },
             { materia: "CSC", profesor: "Vaio Jorge (T)" }
           ],
           MIERCOLES: [
-            { materia: "CNT", profesor: "Da Silva Segovia (TI)" },
-            { materia: "IGS", profesor: "Rivero Griselda (T)" }
+            { materia: "IGS", profesor: "Rivero Griselda (T)" },
+            { materia: "CCD", profesor: "Pacheco (T)" }
           ],
           JUEVES: [
             { materia: "MTM", profesor: "Lopez Karina (T)" },
             { materia: "PLG", profesor: "Roldan Camila (TI)/Bonetti" },
+            { materia: "CNT", profesor: "Olguin Carla (TI)" },
             { materia: "EFC", profesor: "Zulberti Jorge (T)" }
           ],
           VIERNES: [
